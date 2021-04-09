@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &737181893378482538
 Transform:
   m_ObjectHideFlags: 0
@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17056fc56675ad1439b31fc3215a8243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventPathSelectAction: event:/Interface/Action_Select
+  eventPathDeselectAction: event:/Interface/Action_Deselect
   inactiveSprite: {fileID: 21300000, guid: 8fe02fcc31308a246803ff2f2129accc, type: 3}
   activeSprite: {fileID: 21300000, guid: 3e0568d1247ae11439dbdb89ca8d3b02, type: 3}
   selectedSprite: {fileID: 21300000, guid: f37ae2978644ac74bbf711d5b48e34a2, type: 3}

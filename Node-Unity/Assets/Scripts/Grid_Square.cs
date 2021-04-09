@@ -1,9 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 
 public class Grid_Square : MonoBehaviour
 {
+    //Sounds: Block_Place, Block_Remove, Block_Rotate
+    [FMODUnity.EventRef] public string eventPathPlace;
+    [FMODUnity.EventRef] public string eventPathRemove;
+    [FMODUnity.EventRef] public string eventPathRotate;
+    private EventInstance eventPlace;
+    private EventInstance eventRemove;
+    private EventInstance eventRotate;
+
     public Vector2 GridPosition { get; set; }
 
     [field:SerializeField] public Node_Block NodeBlock { get; set; }
@@ -11,7 +20,9 @@ public class Grid_Square : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        eventPlace = FMODUnity.RuntimeManager.CreateInstance(eventPathPlace);
+        eventRemove = FMODUnity.RuntimeManager.CreateInstance(eventPathRemove);
+        eventRotate = FMODUnity.RuntimeManager.CreateInstance(eventPathRotate);
     }
 
     // Update is called once per frame
@@ -30,6 +41,9 @@ public class Grid_Square : MonoBehaviour
             if (NodeBlock.HasEnergy == false)
             {
                 NodeBlock.RotateClockwise();
+
+                //Trigger a sound.
+                eventRotate.start();
             }          
         }
     }
@@ -50,6 +64,9 @@ public class Grid_Square : MonoBehaviour
             NodeBlock.GetComponent<SpriteRenderer>().sortingOrder = 6;
             NodeBlock = null;
 
+            //Trigger a sound.
+            eventRemove.start();
+
             //Doing this deselects any selected Action.
             if (Battle_Manager.selectedAction != null)
             {
@@ -66,6 +83,9 @@ public class Grid_Square : MonoBehaviour
             Battle_Manager.liftedBlock = null;
             NodeBlock.transform.position = transform.position;
             NodeBlock.GetComponent<SpriteRenderer>().sortingOrder = 4;
+
+            //Trigger a sound.
+            eventPlace.start();
         }
     }
 }

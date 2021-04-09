@@ -122,3 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231d1c6cc4b41a44787548f9da2d2d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventPathPlace: event:/Interface/Block_Place
+  eventPathRemove: event:/Interface/Block_Remove
+  eventPathRotate: event:/Interface/Block_Rotate
+  <NodeBlock>k__BackingField: {fileID: 0}

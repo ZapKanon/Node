@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 
 public class Action_Hub : MonoBehaviour
 {
+    //Sounds: Action_Select, Action_Deselect
+    [FMODUnity.EventRef] public string eventPathSelectAction;
+    private EventInstance eventSelectAction;
+
+    [FMODUnity.EventRef] public string eventPathDeselectAction;
+    private EventInstance eventDeselectAction;
+
     public bool Active { get; set; } //Does this action contain energy?
 
     public bool Selected { get; set; } //Has this action been selected for use?
@@ -27,6 +35,9 @@ public class Action_Hub : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        eventSelectAction = FMODUnity.RuntimeManager.CreateInstance(eventPathSelectAction);
+        eventDeselectAction = FMODUnity.RuntimeManager.CreateInstance(eventPathDeselectAction);
+
         Active = false;
         Selected = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -110,6 +121,8 @@ public class Action_Hub : MonoBehaviour
         Battle_Manager.selectedAction = this;
         spriteRenderer.sprite = selectedSprite;
 
+        //Trigger a sound.
+        eventSelectAction.start();
 
         //Healing actions automatically execute on selection (for now you can't heal enemies)
         if (PossessedEnergy.Conductor == Energy.Conductors.Heal)

@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 
 public class Battle_Manager : MonoBehaviour, ISaveable
 {
+    //Sounds: Block_Rotate, Action_Deselect
+    [FMODUnity.EventRef] public string eventPathRotate;
+    private EventInstance eventRotate;
+
+    [FMODUnity.EventRef] public string eventPathDeselectAction;
+    private EventInstance eventDeselectAction;
+
     [SerializeField] private GameObject pulseObject;
     [SerializeField] private GameObject energyObject;
 
@@ -51,6 +59,9 @@ public class Battle_Manager : MonoBehaviour, ISaveable
     // Start is called before the first frame update
     void Start()
     {
+        eventRotate = FMODUnity.RuntimeManager.CreateInstance(eventPathRotate);
+        eventDeselectAction = FMODUnity.RuntimeManager.CreateInstance(eventPathDeselectAction);
+
         pulseTravelSpeed = 1f;
         pulseCycleSpeed = 3.0f;
         pulseCycleTimer = 0f;
@@ -99,7 +110,7 @@ public class Battle_Manager : MonoBehaviour, ISaveable
         {
             if (selectedAction != null)
             {
-                Debug.Log("Enemy thas been targeted and attacked.");
+                Debug.Log("Enemy has been targeted and attacked.");
                 selectedAction.TargetEnemy(selectedEnemy);
             }
             else
@@ -117,6 +128,9 @@ public class Battle_Manager : MonoBehaviour, ISaveable
                 if (liftedBlock.HasEnergy == false)
                 {
                     liftedBlock.RotateClockwise();
+
+                    //Trigger a sound.
+                    eventRotate.start();
                 }
             }
 
@@ -125,6 +139,9 @@ public class Battle_Manager : MonoBehaviour, ISaveable
             {
                 selectedAction.Deselect();
                 selectedAction = null;
+
+                //Trigger a sound.
+                eventDeselectAction.start();
             }
             
         }
