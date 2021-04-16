@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{771cec16-fa06-4cee-946f-6916577f5e67}">
 		<property name="assetPath">
-			<value>Block_Rotate.wav</value>
+			<value>Interface/Block_Rotate.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>

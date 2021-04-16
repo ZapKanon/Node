@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class Battle_Manager : MonoBehaviour, ISaveable
 {
-    //Sounds: Block_Rotate, Action_Deselect
+    //Sounds: Block_Rotate, Action_Deselect, BattleMusic
     [FMODUnity.EventRef] public string eventPathRotate;
     private EventInstance eventRotate;
 
     [FMODUnity.EventRef] public string eventPathDeselectAction;
     private EventInstance eventDeselectAction;
 
+    [FMODUnity.EventRef] public string eventPathBattleMusic;
+    private EventInstance eventBattleMusic;
+
     [SerializeField] private GameObject pulseObject;
     [SerializeField] private GameObject energyObject;
 
     //The speed of a traveling pulse
     [SerializeField] public static float pulseTravelSpeed;
-    //The rate at which new pulses are created
+    //The rate at which new pulses are created in seconds
     [SerializeField] private float pulseCycleSpeed;
     //Current time relative to the pulse cycle
     [SerializeField] private float pulseCycleTimer;
@@ -61,6 +64,7 @@ public class Battle_Manager : MonoBehaviour, ISaveable
     {
         eventRotate = FMODUnity.RuntimeManager.CreateInstance(eventPathRotate);
         eventDeselectAction = FMODUnity.RuntimeManager.CreateInstance(eventPathDeselectAction);
+        eventBattleMusic = FMODUnity.RuntimeManager.CreateInstance(eventPathBattleMusic);
 
         pulseTravelSpeed = 1f;
         pulseCycleSpeed = 3.0f;
@@ -76,11 +80,19 @@ public class Battle_Manager : MonoBehaviour, ISaveable
 
         //Creating a pulse immediately for testing
         CreatePulse();
+
+        //Trigger a sound.
+        //Start battle music immediately
+        eventBattleMusic.start();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Update battle music state based on player's current health as a percentage.
+        float playerHealthPercentage = player.currentHealth / player.maxHealth;
+        eventBattleMusic.setParameterByName("PlayerHealth", playerHealthPercentage);
+        
         UpdatePulseCycle();
 
         //End battle in victory if there are no enemies left, or defeat if the player's health reaches 0.
@@ -93,6 +105,10 @@ public class Battle_Manager : MonoBehaviour, ISaveable
                 enemy.SetActive(false);
             }
             victoryText.SetActive(true);
+
+            //Trigger a sound.
+            //End battle music.
+            eventBattleMusic.stop(STOP_MODE.ALLOWFADEOUT);
         }
         else if (player.currentHealth <= 0)
         {
@@ -102,6 +118,10 @@ public class Battle_Manager : MonoBehaviour, ISaveable
                 enemy.SetActive(false);
             }
             defeatText.SetActive(true);
+
+            //Trigger a sound.
+            //End battle music.
+            eventBattleMusic.stop(STOP_MODE.ALLOWFADEOUT);
         }
 
         //If an enemy is selected after an action, send the action to that enemy.
