@@ -100,7 +100,7 @@ MonoBehaviour:
   sprite180: {fileID: 21300000, guid: d502387673897a84a8400d3004b96aa0, type: 3}
   sprite270: {fileID: 21300000, guid: 131b99202938e5e49bf35fcb63008abb, type: 3}
   spriteRenderer: {fileID: 0}
-  <EnterDirectionA>k__BackingField: 0
+  <EnterDirectionA>k__BackingField: 2
   <EnterDirectionB>k__BackingField: 0
   <ExitDirection>k__BackingField: 0
   <BlockRotation>k__BackingField: 0

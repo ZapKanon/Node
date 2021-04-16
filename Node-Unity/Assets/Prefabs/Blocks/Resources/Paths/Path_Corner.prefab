@@ -99,7 +99,11 @@ MonoBehaviour:
   sprite90: {fileID: 21300000, guid: 3e4aedbdf82450f409ea93d1cec8d0bf, type: 3}
   sprite180: {fileID: 21300000, guid: a5cbd488b80d1a840898ab400df9f527, type: 3}
   sprite270: {fileID: 21300000, guid: 6d9712a0590ca9b4695d05c90d9b384c, type: 3}
-  <EnterDirectionA>k__BackingField: 1
+  spriteRenderer: {fileID: 0}
+  <EnterDirectionA>k__BackingField: 2
   <EnterDirectionB>k__BackingField: 1
+  <ExitDirection>k__BackingField: 1
+  <BlockRotation>k__BackingField: 0
+  <HasEnergy>k__BackingField: 0
   <GridPosition>k__BackingField: {x: 0, y: 1}
   testRotation: 0
