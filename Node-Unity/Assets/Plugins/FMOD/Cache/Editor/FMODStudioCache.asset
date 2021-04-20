@@ -20,6 +20,52 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-6863250535929271071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Attack_Electric
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Attack_Electric
+  guid: 8cfcc1859ec50247bfa302108bff36da
+  Banks:
+  - {fileID: 4921662499794343271}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-4924011467103790527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Action_Activation
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Action_Activation
+  guid: 466ad97fab68644895e3241a54877f15
+  Banks:
+  - {fileID: 4921662499794343271}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &-4628513355693019914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,6 +89,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &-3690114390409886133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy_RedMask/Enemy_RedMask_TakeDamage
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy_RedMask/Enemy_RedMask_TakeDamage
+  guid: 48337a091a72a04f953e216563dcdf5a
+  Banks:
+  - {fileID: 4921662499794343271}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &-1449122402628850822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,6 +126,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Interface/Block_Remove
   guid: 28567e3ef5863a46aa8399c202277959
+  Banks:
+  - {fileID: 4921662499794343271}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-1323592877877872970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Player_TakeDamage
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Player_TakeDamage
+  guid: dd0c1314a785f54c9f3a2f5e634a23ca
+  Banks:
+  - {fileID: 4921662499794343271}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-657153966532337109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy_RedMask/Enemy_RedMask_Defeat
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy_RedMask/Enemy_RedMask_Defeat
+  guid: 3c5d5b056564e74d8ec669ae4e4f1c15
   Banks:
   - {fileID: 4921662499794343271}
   IsStream: 0
@@ -112,13 +227,48 @@ MonoBehaviour:
   - {fileID: 1435058056236064863}
   - {fileID: 520091222835078617}
   - {fileID: 3780136755554227745}
+  - {fileID: 3791627390203822015}
+  - {fileID: 250703555021076806}
+  - {fileID: -657153966532337109}
+  - {fileID: -4924011467103790527}
+  - {fileID: -3690114390409886133}
+  - {fileID: 6623043307872187058}
+  - {fileID: -6863250535929271071}
+  - {fileID: 1315846751153447104}
+  - {fileID: 8852627630667100240}
+  - {fileID: 7082871143172728137}
+  - {fileID: 3163021437820820630}
+  - {fileID: -1323592877877872970}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4921662499794343271}
   StringsBanks:
   - {fileID: 6542495990869421160}
-  stringsBankWriteTime: 637541665850949799
+  stringsBankWriteTime: 637544742374208859
   cacheVersion: 6
+--- !u!114 &250703555021076806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Heal
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Heal
+  guid: 21a264ac12b31c4185595a6b89e53455
+  Banks:
+  - {fileID: 4921662499794343271}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &520091222835078617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,10 +289,73 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -7670241388266675703}
+  - {fileID: 1390547274308141713}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 66000
+--- !u!114 &586503093986750530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BattleMusic/PlayerHealth
+  m_EditorClassIdentifier: 
+  Name: PlayerHealth
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &1315846751153447104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Attack_Ice
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Attack_Ice
+  guid: a9a747c779cc354ea6319248bf18edc9
+  Banks:
+  - {fileID: 4921662499794343271}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &1390547274308141713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BattleMusic/PlayerHealth
+  m_EditorClassIdentifier: 
+  Name: PlayerHealth
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &1435058056236064863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +422,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &3163021437820820630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Action_Waiting
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Action_Waiting
+  guid: d0b1667e61233244bcbdb22ed2154005
+  Banks:
+  - {fileID: 4921662499794343271}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &3780136755554227745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +459,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Music/BattleStart
   guid: 80ed0ace69758143a8fb137a8f070ae5
+  Banks:
+  - {fileID: 4921662499794343271}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &3791627390203822015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy_RedMask/Enemy_RedMask_Attack
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy_RedMask/Enemy_RedMask_Attack
+  guid: 1a3e77af3b56a34586e6c73bb62aa142
   Banks:
   - {fileID: 4921662499794343271}
   IsStream: 0
@@ -247,7 +506,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637541665850919794
+  lastModified: 637544742374188856
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -266,9 +525,78 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637541665850949799
+  lastModified: 637544742374208859
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1124
+    Value: 1918
   Exists: 1
+--- !u!114 &6623043307872187058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Attack_Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Attack_Fire
+  guid: 519c21dbc04cf24ea82c382f3b8221dd
+  Banks:
+  - {fileID: 4921662499794343271}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &7082871143172728137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Attack_Normal
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Attack_Normal
+  guid: ccf86340af70e84ba47d3318fd9a2714
+  Banks:
+  - {fileID: 4921662499794343271}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &8852627630667100240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Player_Defeat
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Player_Defeat
+  guid: b4ccfadb98073b4ea0b04f7aec8cae5d
+  Banks:
+  - {fileID: 4921662499794343271}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0

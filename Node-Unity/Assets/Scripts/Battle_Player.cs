@@ -58,6 +58,7 @@ public class Battle_Player : Battle_Character
         if (currentHealth < 0)
         {
             currentHealth = 0;
+            battleManager.DeadPlayer();
         }
 
         healthBarObject.transform.localScale = new Vector3(currentHealth * (1.0f / maxHealth), healthBarObject.transform.localScale.y, healthBarObject.transform.localScale.z);

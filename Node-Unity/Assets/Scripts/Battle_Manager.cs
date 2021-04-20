@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Battle_Manager : MonoBehaviour, ISaveable
 {
-    //Sounds: Block_Rotate, Action_Deselect, BattleMusic
+    //Sounds: Block_Rotate, Action_Deselect, BattleMusic, PlayerDefeat
     [FMODUnity.EventRef] public string eventPathRotate;
     private EventInstance eventRotate;
 
@@ -14,6 +14,9 @@ public class Battle_Manager : MonoBehaviour, ISaveable
 
     [FMODUnity.EventRef] public string eventPathBattleMusic;
     private EventInstance eventBattleMusic;
+
+    [FMODUnity.EventRef] public string eventPathPlayerDefeat;
+    private EventInstance eventPlayerDefeat;
 
     [SerializeField] private GameObject pulseObject;
     [SerializeField] private GameObject energyObject;
@@ -65,6 +68,7 @@ public class Battle_Manager : MonoBehaviour, ISaveable
         eventRotate = FMODUnity.RuntimeManager.CreateInstance(eventPathRotate);
         eventDeselectAction = FMODUnity.RuntimeManager.CreateInstance(eventPathDeselectAction);
         eventBattleMusic = FMODUnity.RuntimeManager.CreateInstance(eventPathBattleMusic);
+        eventPlayerDefeat = FMODUnity.RuntimeManager.CreateInstance(eventPathPlayerDefeat);
 
         pulseTravelSpeed = 1f;
         pulseCycleSpeed = 3.0f;
@@ -96,7 +100,7 @@ public class Battle_Manager : MonoBehaviour, ISaveable
         UpdatePulseCycle();
 
         //End battle in victory if there are no enemies left, or defeat if the player's health reaches 0.
-        //This currentyl results in infinite pulses being generated over time with nowhere to move.
+        //This currently results in infinite pulses being generated over time with nowhere to move.
         if (enemies.Count == 0)
         {
             pulseTravelSpeed = 0;
@@ -112,16 +116,7 @@ public class Battle_Manager : MonoBehaviour, ISaveable
         }
         else if (player.currentHealth <= 0)
         {
-            pulseTravelSpeed = 0;
-            foreach (GameObject enemy in enemies)
-            {
-                enemy.SetActive(false);
-            }
-            defeatText.SetActive(true);
 
-            //Trigger a sound.
-            //End battle music.
-            eventBattleMusic.stop(STOP_MODE.ALLOWFADEOUT);
         }
 
         //If an enemy is selected after an action, send the action to that enemy.
@@ -242,6 +237,22 @@ public class Battle_Manager : MonoBehaviour, ISaveable
         
     }
 
+    public void DeadPlayer()
+    { 
+        pulseTravelSpeed = 0;
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.SetActive(false);
+        }
+        defeatText.SetActive(true);
+
+        //Trigger a sound.
+        //End battle music.
+        eventBattleMusic.stop(STOP_MODE.ALLOWFADEOUT);
+
+        //Trigger a sound.
+        eventPlayerDefeat.start();
+    }
 
     //Remove a dead enemy from the enemies list
     public void DeadEnemy(Battle_Enemy enemy)

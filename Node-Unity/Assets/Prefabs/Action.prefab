@@ -183,6 +183,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventPathSelectAction: event:/Interface/Action_Select
   eventPathDeselectAction: event:/Interface/Action_Deselect
+  eventPathActionActivation: event:/Sound Effects/Action_Activation
+  eventPathActionWaiting: event:/Sound Effects/Action_Waiting
   inactiveSprite: {fileID: 21300000, guid: 8fe02fcc31308a246803ff2f2129accc, type: 3}
   activeSprite: {fileID: 21300000, guid: 3e0568d1247ae11439dbdb89ca8d3b02, type: 3}
   selectedSprite: {fileID: 21300000, guid: f37ae2978644ac74bbf711d5b48e34a2, type: 3}

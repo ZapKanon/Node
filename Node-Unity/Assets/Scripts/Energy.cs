@@ -1,9 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 
 public class Energy : MonoBehaviour
 {
+    //Sounds: Attack_Normal, Attack_Fire, Attack_Electric, Attack_Ice, Heal
+    [FMODUnity.EventRef] public string eventPathAttackNormal;
+    private EventInstance eventAttackNormal;
+
+    [FMODUnity.EventRef] public string eventPathAttackFire;
+    private EventInstance eventAttackFire;
+
+    [FMODUnity.EventRef] public string eventPathAttackElectric;
+    private EventInstance eventAttackElectric;
+
+    [FMODUnity.EventRef] public string eventPathAttackIce;
+    private EventInstance eventAttackIce;
+
+    [FMODUnity.EventRef] public string eventPathHeal;
+    private EventInstance eventHeal;
+
     public enum Elements
     {
         Normal,
@@ -41,6 +58,12 @@ public class Energy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        eventAttackNormal = FMODUnity.RuntimeManager.CreateInstance(eventPathAttackNormal);
+        eventAttackFire = FMODUnity.RuntimeManager.CreateInstance(eventPathAttackFire);
+        eventAttackElectric = FMODUnity.RuntimeManager.CreateInstance(eventPathAttackElectric);
+        eventAttackIce = FMODUnity.RuntimeManager.CreateInstance(eventPathAttackIce);
+        eventHeal = FMODUnity.RuntimeManager.CreateInstance(eventPathHeal);
+
         //All energy defaults to Attack type
         Conductor = Conductors.Attack;
     }
@@ -71,6 +94,31 @@ public class Energy : MonoBehaviour
         {
             currentTarget.ReceiveEnergy(this);
             //Debug.Log("Actually sending energy to valid target.");
+
+            if (Conductor == Energy.Conductors.Attack)
+            {
+                //Trigger a sound for each attack element.
+                if (Element == Energy.Elements.Normal)
+                {
+                    eventAttackNormal.start();
+                }
+                else if (Element == Energy.Elements.Fire)
+                {
+                    eventAttackFire.start();
+                }
+                else if (Element == Energy.Elements.Electric)
+                {
+                    eventAttackElectric.start();
+                }
+                else if (Element == Energy.Elements.Ice)
+                {
+                    eventAttackIce.start();
+                }
+            }
+            else if (Conductor == Energy.Conductors.Heal)
+            {
+                eventHeal.start();
+            }
         }
     }
 

@@ -95,8 +95,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b7eae688ae1304295f7b95feb16ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventPathAttackNormal: event:/Sound Effects/Attack_Normal
+  eventPathAttackFire: event:/Sound Effects/Attack_Fire
+  eventPathAttackElectric: event:/Sound Effects/Attack_Electric
+  eventPathAttackIce: event:/Sound Effects/Attack_Ice
+  eventPathHeal: event:/Sound Effects/Heal
   <Strength>k__BackingField: 0
+  <BoosterStrength>k__BackingField: 0
   <Element>k__BackingField: 0
   <Conductor>k__BackingField: 0
   <Booster>k__BackingField: 0
   <GridPosition>k__BackingField: {x: 0, y: 0}
+  validTargets: []
+  currentTarget: {fileID: 0}

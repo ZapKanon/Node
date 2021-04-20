@@ -1,9 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 
 public abstract class Battle_Enemy : Battle_Character
 {
+    //Sounds: EnemyAttack, EnemyTakeDamage, EnemyDefeat
+    [FMODUnity.EventRef] public string eventPathEnemyAttack;
+    private EventInstance eventEnemyAttack;
+
+    [FMODUnity.EventRef] public string eventPathEnemyTakeDamage;
+    private EventInstance eventEnemyTakeDamage;
+
+    [FMODUnity.EventRef] public string eventPathEnemyDefeat;
+    private EventInstance eventEnemyDefeat;
+
     [SerializeField] protected Energy[] availableActions;
     [SerializeField] protected float actionTimer;
     protected float actionSpeed;
@@ -21,22 +32,20 @@ public abstract class Battle_Enemy : Battle_Character
     public bool down;
 
     // Start is called before the first frame update
-    //protected override void Start()
-    //{
-    //    base.Start();
-    //    SetUpActions();
-    //}
+    protected override void Start()
+    {
+        base.Start();
+
+        eventEnemyAttack = FMODUnity.RuntimeManager.CreateInstance(eventPathEnemyAttack);
+        eventEnemyTakeDamage = FMODUnity.RuntimeManager.CreateInstance(eventPathEnemyTakeDamage);
+        eventEnemyDefeat = FMODUnity.RuntimeManager.CreateInstance(eventPathEnemyDefeat);
+    }
 
     // Update is called once per frame
     protected virtual void Update()
     {
         UpdateActionTimer();
         AnimateHealthBar();
-
-        if (currentHealth <= 0)
-        {
-            Death();
-        }
     }
 
     //Enemies perform actions at a consistent rate.
@@ -72,6 +81,9 @@ public abstract class Battle_Enemy : Battle_Character
         Energy currentAction = ChooseAction();
         currentAction.Execute();
 
+        //Trigger a sound.
+        eventEnemyAttack.start();
+
         //TEMP movement code for visual feedback
         if (!down)
         {
@@ -98,6 +110,9 @@ public abstract class Battle_Enemy : Battle_Character
     //Destroy the enemy when health reaches 0.
     public void Death()
     {
+        //Trigger a sound.
+        eventEnemyDefeat.start();
+
         battleManager.DeadEnemy(this);
         Destroy(gameObject);
     }
@@ -110,9 +125,15 @@ public abstract class Battle_Enemy : Battle_Character
         float previousHealth = currentHealth;
         currentHealth -= damageTaken * elementalWeaknesses[(int)element];
 
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
         {
             currentHealth = 0;
+            Death();
+        }
+        else
+        {
+            //Trigger a sound.
+            //eventEnemyTakeDamage.start();
         }
 
         healthBarObject.transform.localScale = new Vector3(currentHealth * (1.0f / maxHealth) * 0.6f, healthBarObject.transform.localScale.y, healthBarObject.transform.localScale.z);

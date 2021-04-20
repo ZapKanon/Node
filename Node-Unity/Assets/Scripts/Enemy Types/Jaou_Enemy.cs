@@ -71,5 +71,8 @@ public class Jaou_Enemy : Battle_Enemy
         {
             return availableActions[1];
         }
+
+        //Trigger a sound.
+
     }
 }

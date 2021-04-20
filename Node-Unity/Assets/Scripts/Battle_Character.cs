@@ -49,7 +49,8 @@ public abstract class Battle_Character : MonoBehaviour
         //If the action is an attack:
         if (receivedEnergy.Conductor == Energy.Conductors.Attack)
         {
-            TakeDamage(receivedEnergy.Strength, receivedEnergy.Element);              
+            TakeDamage(receivedEnergy.Strength, receivedEnergy.Element);    
+            
         }
 
         //If the action is a shield:

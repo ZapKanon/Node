@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class Action_Hub : MonoBehaviour
 {
-    //Sounds: Action_Select, Action_Deselect
+    //Sounds: ActionSelect, ActionDeselect, ActionActivation, ActionWaiting
     [FMODUnity.EventRef] public string eventPathSelectAction;
     private EventInstance eventSelectAction;
 
     [FMODUnity.EventRef] public string eventPathDeselectAction;
     private EventInstance eventDeselectAction;
+
+    [FMODUnity.EventRef] public string eventPathActionActivation;
+    private EventInstance eventActionActivation;
+
+    [FMODUnity.EventRef] public string eventPathActionWaiting;
+    private EventInstance eventActionWaiting;
 
     public bool Active { get; set; } //Does this action contain energy?
 
@@ -37,6 +43,8 @@ public class Action_Hub : MonoBehaviour
     {
         eventSelectAction = FMODUnity.RuntimeManager.CreateInstance(eventPathSelectAction);
         eventDeselectAction = FMODUnity.RuntimeManager.CreateInstance(eventPathDeselectAction);
+        eventActionActivation = FMODUnity.RuntimeManager.CreateInstance(eventPathActionActivation);
+        eventActionWaiting = FMODUnity.RuntimeManager.CreateInstance(eventPathActionWaiting);
 
         Active = false;
         Selected = false;
@@ -65,6 +73,9 @@ public class Action_Hub : MonoBehaviour
             PossessedEnergy.GetComponent<SpriteRenderer>().enabled = false;
 
             DisplayActionData();
+
+            //Trigger a sound.
+            eventActionActivation.start();
         }
         else
         {
@@ -94,6 +105,9 @@ public class Action_Hub : MonoBehaviour
         PossessedEnergy.currentTarget = targetedEnemy;
         PossessedEnergy.Execute();
 
+        //Trigger a sound.
+        eventActionWaiting.stop(STOP_MODE.IMMEDIATE);
+
         Battle_Manager.selectedAction = null;
         Deactivate();
     }
@@ -121,9 +135,6 @@ public class Action_Hub : MonoBehaviour
         Battle_Manager.selectedAction = this;
         spriteRenderer.sprite = selectedSprite;
 
-        //Trigger a sound.
-        eventSelectAction.start();
-
         //Healing actions automatically execute on selection (for now you can't heal enemies)
         if (PossessedEnergy.Conductor == Energy.Conductors.Heal)
         {
@@ -132,7 +143,22 @@ public class Action_Hub : MonoBehaviour
 
             Battle_Manager.selectedAction = null;
             Deactivate();
-        }    
+        }
+        else
+        {
+            //Trigger a sound.
+            eventSelectAction.start();
+
+            FMOD.Studio.PLAYBACK_STATE state;
+            eventSelectAction.getPlaybackState(out state);
+            while (state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+            {
+                //UNFINISHED
+            }
+
+            //Trigger a sound.
+            eventActionWaiting.start();
+        }
     }
 
     public void Deselect()
@@ -147,6 +173,9 @@ public class Action_Hub : MonoBehaviour
         {
             spriteRenderer.sprite = inactiveSprite;
         }
+
+        //Trigger a sound.
+        eventActionWaiting.stop(STOP_MODE.IMMEDIATE);
     }
 
     //Clear this action's PossessedEnergy and set all sprites to inactive states.
