@@ -19,7 +19,7 @@ public class Jaou_Enemy : Battle_Enemy
         healthDrainAnimationSpeed = 10.0f;
         healthDrainAnimationDelay = 1.0f;
         healthDrainAnimationTimePassed = 0f;
-        elementalWeaknesses[1] = 1.5f;
+        elementalWeaknesses = new float[] { 1.0f, 1.5f, 0.5f, 1.0f};
     }
 
     // Update is called once per frame

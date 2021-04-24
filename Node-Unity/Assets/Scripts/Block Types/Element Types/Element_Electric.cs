@@ -5,14 +5,18 @@ using UnityEngine;
 public class Element_Electric : Node_Element
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Awake()
     {
+        EnterDirectionA = Directions.Up;
+        EnterDirectionB = Directions.Down;
         elementType = Energy.Elements.Electric;
+        BlockPath = "Elements/Element_Electric";
+        base.Awake();
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
 }
