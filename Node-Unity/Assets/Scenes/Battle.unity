@@ -2683,6 +2683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventPathRotate: event:/Interface/Block_Rotate
   eventPathDeselectAction: event:/Interface/Action_Deselect
+  eventPathBattleStart: event:/Music/BattleStart
   eventPathBattleMusic: event:/Music/BattleMusic
   eventPathPlayerDefeat: event:/Player/Player_Defeat
   pulseObject: {fileID: 8968675211924359341, guid: a787aed81c3ab0d48ac20c2118d716a1, type: 3}
@@ -2694,6 +2695,8 @@ MonoBehaviour:
   - {fileID: 1111097953}
   victoryText: {fileID: 1575914889}
   defeatText: {fileID: 2108135362}
+  battleStarted: 0
+  battleLoop: 0
   testSave: 0
   testLoad: 0
   grid: {fileID: 1945630726}

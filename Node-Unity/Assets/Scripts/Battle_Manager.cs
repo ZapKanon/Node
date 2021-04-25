@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class Battle_Manager : MonoBehaviour, ISaveable
 {
-    //Sounds: Block_Rotate, Action_Deselect, BattleMusic, PlayerDefeat
+    //Sounds: Block_Rotate, Action_Deselect, BattleStart, BattleMusic, PlayerDefeat
     [FMODUnity.EventRef] public string eventPathRotate;
     private EventInstance eventRotate;
 
     [FMODUnity.EventRef] public string eventPathDeselectAction;
     private EventInstance eventDeselectAction;
+
+    [FMODUnity.EventRef] public string eventPathBattleStart;
+    private EventInstance eventBattleStart;
 
     [FMODUnity.EventRef] public string eventPathBattleMusic;
     private EventInstance eventBattleMusic;
@@ -50,6 +53,9 @@ public class Battle_Manager : MonoBehaviour, ISaveable
 
     private Node_Block lastLiftedBlock;
 
+    public bool battleStarted;
+    public bool battleLoop;
+
     [SerializeField] private bool testSave;
     [SerializeField] private bool testLoad;
 
@@ -67,6 +73,7 @@ public class Battle_Manager : MonoBehaviour, ISaveable
     {
         eventRotate = FMODUnity.RuntimeManager.CreateInstance(eventPathRotate);
         eventDeselectAction = FMODUnity.RuntimeManager.CreateInstance(eventPathDeselectAction);
+        eventBattleStart = FMODUnity.RuntimeManager.CreateInstance(eventPathBattleStart);
         eventBattleMusic = FMODUnity.RuntimeManager.CreateInstance(eventPathBattleMusic);
         eventPlayerDefeat = FMODUnity.RuntimeManager.CreateInstance(eventPathPlayerDefeat);
 
@@ -79,15 +86,14 @@ public class Battle_Manager : MonoBehaviour, ISaveable
 
         gridSaveData = new Save_Data();
 
+        battleStarted = false;
+        battleLoop = false;
+
         //Load grid once on startup
         testLoad = true;
 
         //Creating a pulse immediately for testing
-        CreatePulse();
-
-        //Trigger a sound.
-        //Start battle music immediately
-        eventBattleMusic.start();
+        //CreatePulse();
     }
 
     // Update is called once per frame
@@ -97,7 +103,15 @@ public class Battle_Manager : MonoBehaviour, ISaveable
         float playerHealthPercentage = player.currentHealth / player.maxHealth;
         eventBattleMusic.setParameterByName("PlayerHealth", playerHealthPercentage);
         
-        UpdatePulseCycle();
+        //Generate pulses if the battle has progressed past the start period.
+        if (battleLoop)
+        {
+            UpdatePulseCycle();
+        }
+        else
+        {
+            StartBattle();
+        }
 
         //End battle in victory if there are no enemies left, or defeat if the player's health reaches 0.
         //This currently results in infinite pulses being generated over time with nowhere to move.
@@ -181,6 +195,27 @@ public class Battle_Manager : MonoBehaviour, ISaveable
         }
 
         lastLiftedBlock = liftedBlock;
+    }
+
+    //Play start of battle music and play any relevant animations before generating the first pulse.
+    public void StartBattle()
+    {
+        if (battleStarted == false)
+        {
+            //Trigger a sound.
+            eventBattleStart.start();
+            battleStarted = true;
+        }
+
+        FMOD.Studio.PLAYBACK_STATE playbackState;
+        eventBattleStart.getPlaybackState(out playbackState);
+        if (playbackState == FMOD.Studio.PLAYBACK_STATE.STOPPED)
+        {
+            battleLoop = true;
+            //Trigger a sound.
+            eventBattleMusic.start();
+            CreatePulse();
+        }
     }
 
     //If a cycle has passed, create a new pulse object and reset cycleTimer to 0.

@@ -11,7 +11,7 @@ public abstract class Battle_Character : MonoBehaviour
     public float previousHealth;
 
     //Elemental weaknesses / resistances
-    //Order matches Energy.Conductor enum
+    //Order matches Energy.Element enum (Normal, Fire, Ice, Electric)
     public float[] elementalWeaknesses;
     public float healAffinity;
 
