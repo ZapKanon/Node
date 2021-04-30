@@ -57,6 +57,9 @@ public abstract class Node_Block : MonoBehaviour
     public bool Placed { get; set; }
 
     [SerializeField] private bool testRotation;
+
+    public Tooltip_Manager.ToolTips toolTip; //Correlates to ToolTip enum in ToolTip_Manager.
+
     protected virtual void Start()
     {
 
@@ -74,6 +77,8 @@ public abstract class Node_Block : MonoBehaviour
         Placed = true;
         IsSource = false;
         IsReceiver = false;
+        //toolTip = Tooltip_Manager.ToolTips.Action;
+
 
         testRotation = false;
     }

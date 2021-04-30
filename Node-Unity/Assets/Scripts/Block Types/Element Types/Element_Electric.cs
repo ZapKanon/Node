@@ -11,6 +11,7 @@ public class Element_Electric : Node_Element
         EnterDirectionB = Directions.Down;
         elementType = Energy.Elements.Electric;
         BlockPath = "Elements/Element_Electric";
+        toolTip = Tooltip_Manager.ToolTips.Electric;
         base.Awake();
     }
 

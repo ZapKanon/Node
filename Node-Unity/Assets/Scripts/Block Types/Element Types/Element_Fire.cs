@@ -11,6 +11,7 @@ public class Element_Fire : Node_Element
         EnterDirectionB = Directions.Down;
         elementType = Energy.Elements.Fire;
         BlockPath = "Elements/Element_Fire";
+        toolTip = Tooltip_Manager.ToolTips.Fire;
         base.Awake();
     }
 

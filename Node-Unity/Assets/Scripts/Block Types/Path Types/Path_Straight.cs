@@ -10,6 +10,7 @@ public class Path_Straight : Node_Path
         EnterDirectionA = Directions.Up;
         EnterDirectionB = Directions.Down;
         BlockPath = "Paths/Path_Straight";
+        toolTip = Tooltip_Manager.ToolTips.Straight;
         base.Start();
     }
 

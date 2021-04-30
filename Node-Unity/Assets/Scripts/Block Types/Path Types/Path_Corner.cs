@@ -11,6 +11,7 @@ public class Path_Corner : Node_Path
         EnterDirectionB = Directions.Down;
         BlockPath = "Paths/Path_Corner";
         UpdateEnterDirections();
+        toolTip = Tooltip_Manager.ToolTips.Corner;
         base.Start();
     }
 

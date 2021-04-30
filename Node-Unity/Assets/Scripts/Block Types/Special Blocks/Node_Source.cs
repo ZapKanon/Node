@@ -12,6 +12,7 @@ public class Node_Source : Node_Block
         EnterDirectionB = EnterDirectionA;
         ExitDirection = Directions.Up;
         BlockPath = "Special/Node_Source";
+        toolTip = Tooltip_Manager.ToolTips.Source;
         base.Awake();
 
         IsSource = true;

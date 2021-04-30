@@ -31,6 +31,12 @@ public class Grid_Square : MonoBehaviour
         
     }
 
+    private void OnMouseEnter()
+    {
+        if (NodeBlock != null)
+        Battle_Manager.tooltipManager.UpdateToolTip(NodeBlock.toolTip);
+    }
+
     private void OnMouseOver()
     {
         GetComponent<SpriteRenderer>().enabled = true;
@@ -51,6 +57,7 @@ public class Grid_Square : MonoBehaviour
     private void OnMouseExit()
     {
         GetComponent<SpriteRenderer>().enabled = false;
+        Battle_Manager.tooltipManager.ClearToolTip();
     }
 
     
@@ -70,7 +77,7 @@ public class Grid_Square : MonoBehaviour
             //Doing this deselects any selected Action.
             if (Battle_Manager.selectedAction != null)
             {
-                Battle_Manager.selectedAction.Deselect();
+                Battle_Manager.selectedAction.Deselect(false);
                 Battle_Manager.selectedAction = null;
             }
         }

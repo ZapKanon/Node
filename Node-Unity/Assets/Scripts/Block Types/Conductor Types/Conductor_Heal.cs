@@ -9,6 +9,7 @@ public class Conductor_Heal : Node_Conductor
     {
         conductorType = Energy.Conductors.Heal;
         BlockPath = "Conductors/Conductor_Heal";
+        toolTip = Tooltip_Manager.ToolTips.Heal;
         base.Start();
     }
 

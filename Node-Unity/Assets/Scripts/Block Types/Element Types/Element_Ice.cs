@@ -11,6 +11,7 @@ public class Element_Ice : Node_Element
         EnterDirectionB = Directions.Down;
         elementType = Energy.Elements.Ice;
         BlockPath = "Elements/Element_Ice";
+        toolTip = Tooltip_Manager.ToolTips.Ice;
         base.Awake();
     }
 

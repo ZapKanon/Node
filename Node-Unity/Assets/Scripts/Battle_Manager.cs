@@ -5,15 +5,12 @@ using UnityEngine;
 
 public class Battle_Manager : MonoBehaviour, ISaveable
 {
-    //Sounds: Block_Rotate, Action_Deselect, BattleStart, BattleMusic, PlayerDefeat
+    //Sounds: Block_Rotate, Action_Deselect, BattleMusic, PlayerDefeat
     [FMODUnity.EventRef] public string eventPathRotate;
     private EventInstance eventRotate;
 
     [FMODUnity.EventRef] public string eventPathDeselectAction;
     private EventInstance eventDeselectAction;
-
-    [FMODUnity.EventRef] public string eventPathBattleStart;
-    private EventInstance eventBattleStart;
 
     [FMODUnity.EventRef] public string eventPathBattleMusic;
     private EventInstance eventBattleMusic;
@@ -55,6 +52,10 @@ public class Battle_Manager : MonoBehaviour, ISaveable
 
     public bool battleStarted;
     public bool battleLoop;
+    public float battleStartTimer;
+    public float battleStartValue;
+
+    public static Tooltip_Manager tooltipManager;
 
     [SerializeField] private bool testSave;
     [SerializeField] private bool testLoad;
@@ -66,6 +67,7 @@ public class Battle_Manager : MonoBehaviour, ISaveable
     void Awake()
     {
         player = GetComponent<Battle_Player>();
+        tooltipManager = GameObject.Find("Tooltip Manager").GetComponent<Tooltip_Manager>();
     }
 
     // Start is called before the first frame update
@@ -73,7 +75,6 @@ public class Battle_Manager : MonoBehaviour, ISaveable
     {
         eventRotate = FMODUnity.RuntimeManager.CreateInstance(eventPathRotate);
         eventDeselectAction = FMODUnity.RuntimeManager.CreateInstance(eventPathDeselectAction);
-        eventBattleStart = FMODUnity.RuntimeManager.CreateInstance(eventPathBattleStart);
         eventBattleMusic = FMODUnity.RuntimeManager.CreateInstance(eventPathBattleMusic);
         eventPlayerDefeat = FMODUnity.RuntimeManager.CreateInstance(eventPathPlayerDefeat);
 
@@ -88,9 +89,10 @@ public class Battle_Manager : MonoBehaviour, ISaveable
 
         battleStarted = false;
         battleLoop = false;
+        battleStartValue = 3.0f; //Time before first pulse is generated. (Should match battleStart sound length.)
 
         //Load grid once on startup
-        testLoad = true;
+        //testLoad = true;
 
         //Creating a pulse immediately for testing
         //CreatePulse();
@@ -166,11 +168,11 @@ public class Battle_Manager : MonoBehaviour, ISaveable
             //Deselect any selected action.
             if (selectedAction != null)
             {
-                selectedAction.Deselect();
+                selectedAction.Deselect(false);
                 selectedAction = null;
 
-                //Trigger a sound.
-                eventDeselectAction.start();
+                //Trigger a sound. (Moved to Action_Hub Deselect method)
+                //eventDeselectAction.start();
             }
             
         }
@@ -200,20 +202,18 @@ public class Battle_Manager : MonoBehaviour, ISaveable
     //Play start of battle music and play any relevant animations before generating the first pulse.
     public void StartBattle()
     {
+        battleStartTimer += Time.deltaTime;
+
         if (battleStarted == false)
         {
             //Trigger a sound.
-            eventBattleStart.start();
+            eventBattleMusic.start();
             battleStarted = true;
         }
 
-        FMOD.Studio.PLAYBACK_STATE playbackState;
-        eventBattleStart.getPlaybackState(out playbackState);
-        if (playbackState == FMOD.Studio.PLAYBACK_STATE.STOPPED)
+        if (battleStartTimer >= battleStartValue)
         {
             battleLoop = true;
-            //Trigger a sound.
-            eventBattleMusic.start();
             CreatePulse();
         }
     }

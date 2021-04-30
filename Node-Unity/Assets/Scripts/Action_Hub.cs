@@ -38,6 +38,12 @@ public class Action_Hub : MonoBehaviour
     private SpriteRenderer elementRenderer;
     private SpriteRenderer boosterRenderer;
 
+    FMOD.Studio.PLAYBACK_STATE selectActionState;
+    FMOD.Studio.PLAYBACK_STATE actionWaitingState;
+
+    bool alphaIncreasing; // Used for pulsing of sprite while actionWaiting plays.
+    float waitingValue;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,12 +58,51 @@ public class Action_Hub : MonoBehaviour
         conductorRenderer = conductorObject.GetComponent<SpriteRenderer>();
         elementRenderer = elementObject.GetComponent<SpriteRenderer>();
         boosterRenderer = boosterObject.GetComponent<SpriteRenderer>();
+
+        alphaIncreasing = false;
+        waitingValue = 0.54f; //Length of time for a hub's alpha value to travel from 1.0 -> 0.0 or vice versa. (Should be equal to 1/2 duration of actionWaiting sound.)
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Selected)
+        {
+            eventSelectAction.getPlaybackState(out selectActionState);
+            eventActionWaiting.getPlaybackState(out actionWaitingState);
+
+            //Once the selectAction sound has finished playing, start the actionWaiting loop if it hasn't started already.
+            if (selectActionState == FMOD.Studio.PLAYBACK_STATE.STOPPED && actionWaitingState == FMOD.Studio.PLAYBACK_STATE.STOPPED)
+            {
+                //Trigger a sound.
+                eventActionWaiting.start();
+            }
+
+
+            //Change alpha value to match actionWaiting pulsing sound
+            Color tempColor = spriteRenderer.color;
+
+            if (alphaIncreasing == false)
+            {
+                tempColor.a -= Time.deltaTime / waitingValue;
+                spriteRenderer.color = tempColor;
+
+                if (spriteRenderer.color.a <= 0f)
+                {
+                    alphaIncreasing = true;
+                }
+            }
+            else
+            {
+                tempColor.a += Time.deltaTime / waitingValue;
+                spriteRenderer.color = tempColor;
+
+                if (spriteRenderer.color.a >= 1f)
+                {
+                    alphaIncreasing = false;
+                }
+            }
+        }
     }
 
     //Receive energy from a Node_Block and become an active action.
@@ -112,6 +157,12 @@ public class Action_Hub : MonoBehaviour
         Deactivate();
     }
 
+    private void OnMouseOver()
+    {
+        if (Active)
+        Battle_Manager.tooltipManager.UpdateToolTip(Tooltip_Manager.ToolTips.Action);
+    }
+
     //Select this action when clicked if active.
     private void OnMouseDown()
     {
@@ -121,13 +172,18 @@ public class Action_Hub : MonoBehaviour
         }
     }
 
+    private void OnMouseExit()
+    {
+        Battle_Manager.tooltipManager.ClearToolTip();
+    }
+
     //Set this action as selected for use.
     public void Select()
     {
         //Disable selection status on all actions.
         foreach (GameObject action in Action_Bar.actions)
         {
-            action.GetComponent<Action_Hub>().Deselect();
+            action.GetComponent<Action_Hub>().Deselect(false);
         }
 
         //Then set this action as selected.
@@ -148,41 +204,41 @@ public class Action_Hub : MonoBehaviour
         {
             //Trigger a sound.
             eventSelectAction.start();
-
-            FMOD.Studio.PLAYBACK_STATE state;
-            eventSelectAction.getPlaybackState(out state);
-            while (state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
-            {
-                //UNFINISHED
-            }
-
-            //Trigger a sound.
-            eventActionWaiting.start();
         }
     }
 
-    public void Deselect()
+    public void Deselect(bool deactivating)
     {
-        Selected = false;
-
-        if (Active)
+        if (Selected == true)
         {
-            spriteRenderer.sprite = activeSprite;
-        }
-        else
-        {
-            spriteRenderer.sprite = inactiveSprite;
+            Selected = false;
+
+            if (Active)
+            {
+                spriteRenderer.sprite = activeSprite;
+            }
+            else
+            {
+                spriteRenderer.sprite = inactiveSprite;
+            }
+
+            //Only play deselection sound if not executing an attack.
+            if (deactivating == false)
+            {
+                //Trigger a sound.
+                eventActionWaiting.stop(STOP_MODE.IMMEDIATE);
+                eventDeselectAction.start();
+            }
         }
 
-        //Trigger a sound.
-        eventActionWaiting.stop(STOP_MODE.IMMEDIATE);
+        ResetAlpha();
     }
 
     //Clear this action's PossessedEnergy and set all sprites to inactive states.
     public void Deactivate()
     {
         Active = false;
-        Deselect();
+        Deselect(true);
         spriteRenderer.sprite = inactiveSprite;
         conductorRenderer.sprite = null;
         elementRenderer.sprite = null;
@@ -190,5 +246,15 @@ public class Action_Hub : MonoBehaviour
 
         Destroy(PossessedEnergy.gameObject);
         PossessedEnergy = null;
+    }
+
+    //When deselecting a hub, rest opacity to 100%.
+    public void ResetAlpha()
+    {
+        Color tempColor = spriteRenderer.color;
+        tempColor.a = 1.0f;
+        spriteRenderer.color = tempColor;
+
+        alphaIncreasing = false;
     }
 }

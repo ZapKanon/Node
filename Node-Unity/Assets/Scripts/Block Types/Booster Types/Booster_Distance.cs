@@ -9,6 +9,7 @@ public class Booster_Distance : Node_Booster
     {
         boosterType = Energy.Boosters.Distance;
         BlockPath = "Boosters/Booster_Distance";
+        toolTip = Tooltip_Manager.ToolTips.Distance;
         base.Awake();
 
     }
