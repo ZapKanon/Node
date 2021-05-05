@@ -22,7 +22,7 @@ public abstract class Node_Block : MonoBehaviour
 
     //Sprites to be swapped when rotating the block.
     //Several blocks involve symbols or text that should not rotate with the rest of the block, so multiple sprites are needed.
-    [SerializeField] protected Sprite sprite0;
+    [SerializeField] public Sprite sprite0;
     [SerializeField] protected Sprite sprite90;
     [SerializeField] protected Sprite sprite180;
     [SerializeField] protected Sprite sprite270;
@@ -59,6 +59,7 @@ public abstract class Node_Block : MonoBehaviour
     [SerializeField] private bool testRotation;
 
     public Tooltip_Manager.ToolTips toolTip; //Correlates to ToolTip enum in ToolTip_Manager.
+    public Color32 tooltipColor;
 
     protected virtual void Start()
     {
@@ -77,8 +78,7 @@ public abstract class Node_Block : MonoBehaviour
         Placed = true;
         IsSource = false;
         IsReceiver = false;
-        //toolTip = Tooltip_Manager.ToolTips.Action;
-
+        tooltipColor = Color.black;
 
         testRotation = false;
     }
@@ -120,7 +120,7 @@ public abstract class Node_Block : MonoBehaviour
                 PossessedEnergy.GetComponent<SpriteRenderer>().enabled = true;
             }
             //Move energy through first half of block.
-            else if (EnergyPossessionTimer < Battle_Manager.energyTravelSpeed / 2f)
+            else if (EnergyPossessionTimer < PossessedEnergy.travelSpeed / 2f)
             {
                 if (EnterDirectionA != ExitDirection)
                 {
@@ -132,17 +132,17 @@ public abstract class Node_Block : MonoBehaviour
                 }
             }
             //If the energy has just completed half of its movmeent through this block, update its initial position to the center of this block.
-            else if (prevPossessionTimer < Battle_Manager.energyTravelSpeed / 2f && EnergyPossessionTimer >= Battle_Manager.energyTravelSpeed)
+            else if (prevPossessionTimer < PossessedEnergy.travelSpeed / 2f && EnergyPossessionTimer >= PossessedEnergy.travelSpeed)
             {
                 PossessedEnergy.transform.position = transform.position;
             }
             //Move energy through second half of block.
-            else if (EnergyPossessionTimer >= Battle_Manager.energyTravelSpeed / 2f && EnergyPossessionTimer < Battle_Manager.energyTravelSpeed)
+            else if (EnergyPossessionTimer >= PossessedEnergy.travelSpeed / 2f && EnergyPossessionTimer < PossessedEnergy.travelSpeed)
             {
                 MoveEnergySecondHalf();
             }
             //If the energy has completed its movement, send it to the next block.
-            else if (EnergyPossessionTimer >= Battle_Manager.energyTravelSpeed)
+            else if (EnergyPossessionTimer >= PossessedEnergy.travelSpeed)
             {               
                 FindSendTarget();
                 EnergyPossessionTimer = 0f;
@@ -161,7 +161,7 @@ public abstract class Node_Block : MonoBehaviour
     //The first half of energy movement has a direction based on the block's used EnterDirection.
     public void MoveEnergyFirstHalf(Directions enterDirection)
     {
-        float energyProgressPercent = EnergyPossessionTimer / (Battle_Manager.energyTravelSpeed / 2f);
+        float energyProgressPercent = EnergyPossessionTimer / (PossessedEnergy.travelSpeed / 2f);
 
         switch (enterDirection)
         {
@@ -190,7 +190,7 @@ public abstract class Node_Block : MonoBehaviour
     //The second half of energy movement has a direction based on the block's ExitDirection.
     public void MoveEnergySecondHalf()
     {
-        float energyProgressPercent = (EnergyPossessionTimer - Battle_Manager.energyTravelSpeed / 2) / (Battle_Manager.energyTravelSpeed / 2);
+        float energyProgressPercent = (EnergyPossessionTimer - PossessedEnergy.travelSpeed / 2) / (PossessedEnergy.travelSpeed / 2);
 
         switch (ExitDirection)
         {

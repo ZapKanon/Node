@@ -1,0 +1,52 @@
+Key,English(en),Japanese(ja)
+Source_Title,Source,ソース
+Source_Subtitle,Block : Special,
+Source_Description,"Collects energy from the Pulse as it passes below the grid.
+
+Starting with this block, build a pathway from the bottom of the grid to the top.",
+Straight_Title,Straight,ストレート
+Straight_Subtitle,Block : Path,
+Straight_Description,Guides energy without affecting its properties.,
+Corner_Title,Corner,コーナー
+Corner_Subtitle,Block : Path,
+Corner_Description,Guides energy without affecting its properties.,
+Fire_Title,Fire,ファイアー
+Fire_Subtitle,Block : Element,
+Fire_Description,"Imbues passing energy with the Fire element.
+
+Characters possess elemental weaknesses and resistances.",
+Ice_Title,Ice,アイス
+Ice_Subtitle,Block : Element,
+Ice_Description,"Imbues passing energy with the Ice element.
+
+Characters possess elemental weaknesses and resistances.",
+Electric_Title,Electric,エレクトリック
+Electric_Subtitle,Block : Element,
+Electric_Description,"Imbues passing energy with the Electric element.
+
+Characters possess elemental weaknesses and resistances.",
+Heal_Title,Heal,ヒール
+Heal_Subtitle,Block : Conductor,
+Heal_Description,"Imbues passing energy with a healing effect.
+
+This energy will heal you instead of dealing damage to enemies.
+
+Elemental strengths and weaknesses still apply when healing.",
+Distance_Title,Distance,ディスタンス
+Distance_Subtitle,Block : Booster,
+Distance_Description,"Once energy passes through a Distance booster, it receives a flat strength increase for each block it passes through in the future.
+
+This strength increase applies to attacking, healing, and most other action types.",
+Speed_Title,Speed,スピード
+Speed_Subtitle,Block : Booster,
+Speed_Description,"Once energy passes through a Speed booster, it will travel more quickly through the grid in the future.",
+Action_Title,Action,アクション
+Dash,-,
+Conductor,Conductor,
+Element,Element,
+Booster,Booster,
+Action_Description,"Select an action, then select an enemy to attack them. Some action types do not require a target.",
+Action_Strength,Strength,
+None_Title,None,なし
+Attack_Title,Attack,アタック
+Normal_Title,Normal,ノーマル

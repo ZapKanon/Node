@@ -177,6 +177,16 @@ public class Battle_Manager : MonoBehaviour, ISaveable
             
         }
 
+        //Show the tooltip for any lifted block at all times.
+        if (liftedBlock != null)
+        {
+            tooltipManager.UpdateToolTip(liftedBlock.toolTip, liftedBlock);
+        }
+        else if (selectedAction != null)
+        {
+            tooltipManager.UpdateToolTip(Tooltip_Manager.ToolTips.Action, null, selectedAction);
+        }
+
         //Update the node grid whenever a block is placed or removed.
         if (lastLiftedBlock != liftedBlock)
         {
@@ -265,8 +275,9 @@ public class Battle_Manager : MonoBehaviour, ISaveable
                 newEnergy.GridPosition = new Vector2(pulseColumn, 4);
                 currentBlock.PossessedEnergy = newEnergy;
                 currentBlock.HasEnergy = true;
+                newEnergy.EnteredNewBlock();
 
-                Debug.Log("Creating energy in column " + pulseColumn);
+                //Debug.Log("Creating energy in column " + pulseColumn);
             }
         }           
         

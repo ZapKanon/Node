@@ -7,10 +7,11 @@ public class Conductor_Heal : Node_Conductor
     // Start is called before the first frame update
     protected override void Start()
     {
+        base.Start();
         conductorType = Energy.Conductors.Heal;
         BlockPath = "Conductors/Conductor_Heal";
         toolTip = Tooltip_Manager.ToolTips.Heal;
-        base.Start();
+        tooltipColor = new Color32(75, 183, 73, 255);
     }
 
     // Update is called once per frame

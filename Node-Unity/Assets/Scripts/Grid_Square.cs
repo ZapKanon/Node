@@ -34,7 +34,7 @@ public class Grid_Square : MonoBehaviour
     private void OnMouseEnter()
     {
         if (NodeBlock != null)
-        Battle_Manager.tooltipManager.UpdateToolTip(NodeBlock.toolTip);
+        Battle_Manager.tooltipManager.UpdateToolTip(NodeBlock.toolTip, NodeBlock);
     }
 
     private void OnMouseOver()

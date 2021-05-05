@@ -70,7 +70,16 @@ public abstract class Battle_Character : MonoBehaviour
         {
 
             //TODO: Change this to use a Heal method
-            currentHealth += receivedEnergy.Strength * healAffinity;
+
+            if (currentHealth + receivedEnergy.Strength * healAffinity <= maxHealth)
+            {
+                currentHealth += receivedEnergy.Strength * healAffinity;
+            }
+            else
+            {
+                currentHealth = maxHealth;
+            }
+
         }
     }
 }

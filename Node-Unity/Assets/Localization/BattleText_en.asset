@@ -1,0 +1,227 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: BattleText_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 9e91f7794bf37744db404206c0081a2c, type: 2}
+  m_Metadata:
+    m_Items:
+    - id: 0
+  m_TableData:
+  - m_Id: 703956456747008
+    m_Localized: Source
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 703956456747009
+    m_Localized: 'Block : Special'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747010
+    m_Localized: 'Collects energy from the Pulse as it passes below the grid.
+
+
+      Starting
+      with this block, build a pathway from the bottom of the grid to the top.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747011
+    m_Localized: Straight
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 703956456747012
+    m_Localized: 'Block : Path'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747013
+    m_Localized: Guides energy without affecting its properties.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747037
+    m_Localized: Select an action, then select an enemy to attack them. Some action
+      types do not require a target.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747038
+    m_Localized: Strength
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747036
+    m_Localized: 'Conductor
+
+      Element
+
+      Booster'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747014
+    m_Localized: Corner
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 703956456747035
+    m_Localized: Action
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 703956456747034
+    m_Localized: Once energy passes through a Speed booster, it will travel more
+      quickly through the grid in the future.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747033
+    m_Localized: 'Block : Booster'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747032
+    m_Localized: Speed
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 703956456747031
+    m_Localized: 'Once energy passes through a Distance booster, it receives a flat
+      strength increase for each block it passes through in the future.
+
+
+      This
+      strength increase applies to attacking, healing, and most other action types.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747030
+    m_Localized: 'Block : Booster'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747029
+    m_Localized: Distance
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 703956456747028
+    m_Localized: 'Imbues passing energy with a healing effect.
+
+
+      This energy
+      will heal you instead of dealing damage to enemies.
+
+
+      Elemental strengths
+      and weaknesses still apply when healing.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747027
+    m_Localized: 'Block : Conductor'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747026
+    m_Localized: Heal
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 703956456747015
+    m_Localized: 'Block : Path'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747016
+    m_Localized: Guides energy without affecting its properties.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747017
+    m_Localized: Fire
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 703956456747018
+    m_Localized: 'Block : Element'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747019
+    m_Localized: 'Imbues passing energy with the Fire element.
+
+
+      Characters
+      possess elemental weaknesses and resistances.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747020
+    m_Localized: Ice
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 703956456747021
+    m_Localized: 'Block : Element'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747022
+    m_Localized: 'Imbues passing energy with the Ice element.
+
+
+      Characters
+      possess elemental weaknesses and resistances.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747023
+    m_Localized: Electric
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 703956456747024
+    m_Localized: 'Block : Element'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747025
+    m_Localized: 'Imbues passing energy with the Electric element.
+
+
+      Characters
+      possess elemental weaknesses and resistances.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 729460115156992
+    m_Localized: None
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 729460119351296
+    m_Localized: Attack
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 729886722011136
+    m_Localized: Normal
+    m_Metadata:
+      m_Items:
+      - id: 0
+  - m_Id: 740939832930304
+    m_Localized: '-'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 740939832930305
+    m_Localized: Conductor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 740939832930306
+    m_Localized: Element
+    m_Metadata:
+      m_Items: []
+  - m_Id: 740939832930307
+    m_Localized: Booster
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1
+    00000000:
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00b0cafed397020000b04aab7097020000b00aab7097020000b08aa23e80020003b08aa23e80020006b08aa23e80020009b08aa23e8002000cb08aa23e8002000fb08aa23e80020012b08aa23e80020015b08aa23e80020018b08aa23e8002001bb08aa23e800200

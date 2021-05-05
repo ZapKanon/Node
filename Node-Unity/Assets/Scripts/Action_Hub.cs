@@ -24,7 +24,7 @@ public class Action_Hub : MonoBehaviour
 
     public Energy PossessedEnergy { get; set; }
 
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     [SerializeField] private Sprite inactiveSprite;
     [SerializeField] private Sprite activeSprite;
@@ -34,9 +34,9 @@ public class Action_Hub : MonoBehaviour
     [SerializeField] private GameObject elementObject;
     [SerializeField] private GameObject boosterObject;
 
-    private SpriteRenderer conductorRenderer;
-    private SpriteRenderer elementRenderer;
-    private SpriteRenderer boosterRenderer;
+    public SpriteRenderer conductorRenderer;
+    public SpriteRenderer elementRenderer;
+    public SpriteRenderer boosterRenderer;
 
     FMOD.Studio.PLAYBACK_STATE selectActionState;
     FMOD.Studio.PLAYBACK_STATE actionWaitingState;
@@ -160,7 +160,8 @@ public class Action_Hub : MonoBehaviour
     private void OnMouseOver()
     {
         if (Active)
-        Battle_Manager.tooltipManager.UpdateToolTip(Tooltip_Manager.ToolTips.Action);
+        Battle_Manager.tooltipManager.UpdateToolTip(Tooltip_Manager.ToolTips.Action, null, this);
+
     }
 
     //Select this action when clicked if active.
@@ -232,6 +233,7 @@ public class Action_Hub : MonoBehaviour
         }
 
         ResetAlpha();
+        Battle_Manager.tooltipManager.ClearToolTip();
     }
 
     //Clear this action's PossessedEnergy and set all sprites to inactive states.

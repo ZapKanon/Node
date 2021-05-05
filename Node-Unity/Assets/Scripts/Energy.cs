@@ -40,7 +40,8 @@ public class Energy : MonoBehaviour
     public enum Boosters
     {
         None,
-        Distance
+        Distance,
+        Speed
     }
 
     [field:SerializeField] public float Strength { get; set; }
@@ -55,6 +56,8 @@ public class Energy : MonoBehaviour
     [SerializeField] private Battle_Character[] validTargets;
     public Battle_Character currentTarget;
 
+    public float travelSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +69,9 @@ public class Energy : MonoBehaviour
 
         //All energy defaults to Attack type
         Conductor = Conductors.Attack;
+
+        //Set travel speed to default according to Battle_Manager.
+        travelSpeed = Battle_Manager.energyTravelSpeed;
     }
 
     // Update is called once per frame

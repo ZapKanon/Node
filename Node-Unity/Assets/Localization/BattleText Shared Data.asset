@@ -1,0 +1,183 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: BattleText Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: BattleTooltips
+  m_TableCollectionNameGuidString: 9e91f7794bf37744db404206c0081a2c
+  m_Entries:
+  - m_Id: 703956456747008
+    m_Key: Source_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747009
+    m_Key: Source_Subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747010
+    m_Key: Source_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747011
+    m_Key: Straight_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747012
+    m_Key: Straight_Subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747013
+    m_Key: Straight_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747014
+    m_Key: Corner_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747015
+    m_Key: Corner_Subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747016
+    m_Key: Corner_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747017
+    m_Key: Fire_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747018
+    m_Key: Fire_Subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747019
+    m_Key: Fire_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747020
+    m_Key: Ice_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747021
+    m_Key: Ice_Subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747022
+    m_Key: Ice_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747023
+    m_Key: Electric_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747024
+    m_Key: Electric_Subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747025
+    m_Key: Electric_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747026
+    m_Key: Heal_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747027
+    m_Key: Heal_Subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747028
+    m_Key: Heal_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747029
+    m_Key: Distance_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747030
+    m_Key: Distance_Subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747031
+    m_Key: Distance_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747032
+    m_Key: Speed_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747033
+    m_Key: Speed_Subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747034
+    m_Key: Speed_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747035
+    m_Key: Action_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747036
+    m_Key: Action_Subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747037
+    m_Key: Action_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703956456747038
+    m_Key: Action_Strength
+    m_Metadata:
+      m_Items: []
+  - m_Id: 729460115156992
+    m_Key: None_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 729460119351296
+    m_Key: Attack_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 729886722011136
+    m_Key: Normal_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 729886726205440
+    m_Key: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 740939832930304
+    m_Key: Dash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 740939832930305
+    m_Key: Conductor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 740939832930306
+    m_Key: Element
+    m_Metadata:
+      m_Items: []
+  - m_Id: 740939832930307
+    m_Key: Booster
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1619934460449
