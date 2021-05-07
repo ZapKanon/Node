@@ -29,7 +29,17 @@ public abstract class Battle_Enemy : Battle_Character
 
     protected float healthDrainAnimationTimePassed;
 
-    public bool down;
+    [SerializeField] protected SpriteRenderer activeSprite;
+    [SerializeField] protected SpriteRenderer inactiveSprite;
+
+    //TEMP Y positions for movement when attacking.
+    public float up;
+    public float neutral;
+    public float down;
+    public bool actionSoundTriggered;
+    public bool inNeutralPosition;
+    public bool woundUp;
+    public bool completedAction;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -39,6 +49,11 @@ public abstract class Battle_Enemy : Battle_Character
         eventEnemyAttack = FMODUnity.RuntimeManager.CreateInstance(eventPathEnemyAttack);
         eventEnemyTakeDamage = FMODUnity.RuntimeManager.CreateInstance(eventPathEnemyTakeDamage);
         eventEnemyDefeat = FMODUnity.RuntimeManager.CreateInstance(eventPathEnemyDefeat);
+
+        up = transform.position.y + 0.05f;
+        neutral = transform.position.y;
+        down = transform.position.y - 0.1f;
+        activeSprite.color = new Color(1, 1, 1, 0);
     }
 
     // Update is called once per frame
@@ -53,17 +68,73 @@ public abstract class Battle_Enemy : Battle_Character
     {
         actionTimer += Time.deltaTime;
 
-        if (actionTimer >= actionSpeed / 7f && down == true)
+        //TEMP visual feedback, return to default Y position after attacking.
+        if (actionTimer >= 0 && actionTimer < 1f)
         {
-            transform.position += new Vector3(0, 0.05f, 0);
-            down = false;
+            if (inNeutralPosition == false)
+            {
+                if (transform.position.y < neutral)
+                {
+                    transform.position += new Vector3(0, 0.15f * Time.deltaTime, 0);
+                    activeSprite.color += new Color(0, 0, 0, -2f * Time.deltaTime);
+                }
+                else
+                {
+                    transform.position = new Vector3(transform.position.x, neutral, transform.position.z);
+                    inNeutralPosition = true;
+                    activeSprite.color = new Color(1, 1, 1, 0);
+                }
+            }
         }
 
-        if (actionTimer >= actionSpeed)
+        else if (actionTimer >= actionSpeed - 2f && actionTimer < actionSpeed)
+        {
+            if (actionSoundTriggered == false)
+            {
+                //Trigger a sound.
+                eventEnemyAttack.start();
+                actionSoundTriggered = true;
+            }
+
+            //TEMP visual feedback, enemy moves upward while winding up their attack.
+            if (woundUp == false)
+            {
+                if (transform.position.y < up)
+                {
+                    transform.position += new Vector3(0, 0.04f * Time.deltaTime, 0);
+                    activeSprite.color += new Color(0, 0, 0, 1f * Time.deltaTime);
+                    inNeutralPosition = false;
+                }
+                //Set enemy Y position exactly once windup is complete.
+                else
+                {
+                    transform.position = new Vector3(transform.position.x, up, transform.position.z);
+                    woundUp = true;
+                    activeSprite.color = new Color(1, 1, 1, 1);
+                }
+            }
+            else
+            {
+                if (transform.position.y > down)
+                {
+                    transform.position += new Vector3(0, -0.5f * Time.deltaTime, 0);
+                }
+                else
+                {
+                    transform.position = new Vector3(transform.position.x, down, transform.position.z);
+                    completedAction = true;
+                }
+            }
+        }
+
+        if (completedAction == true)
         {
             Debug.Log("Executing enemy action.");
             ExecuteAction();
             actionTimer -= actionSpeed;
+            woundUp = false;
+            completedAction = false;
+            actionSoundTriggered = false;
         }
     }
 
@@ -80,16 +151,6 @@ public abstract class Battle_Enemy : Battle_Character
     {
         Energy currentAction = ChooseAction();
         currentAction.Execute();
-
-        //Trigger a sound.
-        eventEnemyAttack.start();
-
-        //TEMP movement code for visual feedback
-        if (!down)
-        {
-            transform.position += new Vector3(0, -0.05f, 0);
-            down = true;
-        }
     }
 
     //Select this enemy when clicked if active.

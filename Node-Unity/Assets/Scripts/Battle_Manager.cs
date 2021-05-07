@@ -24,9 +24,9 @@ public class Battle_Manager : MonoBehaviour, ISaveable
     //The speed of a traveling pulse
     [SerializeField] public static float pulseTravelSpeed;
     //The rate at which new pulses are created in seconds
-    [SerializeField] private float pulseCycleSpeed;
+    [SerializeField] public float pulseCycleSpeed;
     //Current time relative to the pulse cycle
-    [SerializeField] private float pulseCycleTimer;
+    [SerializeField] public float pulseCycleTimer;
 
     [SerializeField] public static float energyTravelSpeed;
 

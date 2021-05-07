@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class Battle_Player : Battle_Character
 {
     [SerializeField] private GameObject healthBarObject;
+    private SpriteRenderer healthBarSprite;
     [SerializeField] private GameObject damageTakenObject;
     [SerializeField] private float currentAnimatedHealth;
     private float healthDrainAnimationSpeed;
     private float healthDrainAnimationDelay;
 
     private float healthDrainAnimationTimePassed;
+
+    bool alphaIncreasing; // Used for pulsing of sprite while at low health.
 
     [SerializeField] private bool testDamage;
 
@@ -30,6 +33,8 @@ public class Battle_Player : Battle_Character
 
         //TakeDamage(30.0f);
         testDamage = false;
+
+        healthBarSprite = healthBarObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -38,13 +43,23 @@ public class Battle_Player : Battle_Character
         AnimateHealthBar();
         previousHealth = currentHealth;
 
+        if (currentHealth <= maxHealth / 4)
+        {
+            AnimateLowHealth();
+        }
+        else if (healthBarSprite.color.a < 1.0f)
+        {
+            Color tempColor = healthBarSprite.color;
+            tempColor.a = 1.0f;
+            healthBarSprite.color = tempColor;
+        }
+
         //Test to simulate taking damage
         if (testDamage == true)
         {
             TakeDamage(30f, Energy.Elements.Normal);
             testDamage = false;
-        }
-        
+        }       
     }
 
     //Update the player's currentHealth and animate their health bar.
@@ -55,7 +70,7 @@ public class Battle_Player : Battle_Character
         previousHealth = currentHealth;
         currentHealth -= damageTaken * elementalWeaknesses[(int)element];
 
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
         {
             currentHealth = 0;
             battleManager.DeadPlayer();
@@ -72,7 +87,7 @@ public class Battle_Player : Battle_Character
     //Animate draining of the yellow health bar to show recently taken damage.
     void AnimateHealthBar()
     {
-        //If health is greater than expected (the playr has been healed, for example), immediately update both health bars.
+        //If health is greater than expected (the player has been healed, for example), immediately update both health bars.
         if (previousHealth < currentHealth)
         {
             healthBarObject.transform.localScale = new Vector3(currentHealth * (1.0f / maxHealth), healthBarObject.transform.localScale.y, healthBarObject.transform.localScale.z);
@@ -102,6 +117,43 @@ public class Battle_Player : Battle_Character
         {
             healthDrainAnimationTimePassed = 0f;
             currentAnimatedHealth = currentHealth;
+        }
+    }
+
+    //Increment the opacity of the health bar rhythmically when low on health. 
+    //This is super jank and needs to be rewritten to allow for different BPM music tracks.
+    void AnimateLowHealth()
+    {
+        //Change alpha value to match actionWaiting pulsing sound
+        Color tempColor = healthBarSprite.color;
+
+        if (battleManager.pulseCycleTimer > battleManager.pulseCycleSpeed * 0 && battleManager.pulseCycleTimer < battleManager.pulseCycleSpeed * 1 / 12 && alphaIncreasing == false)
+        {
+            tempColor.a = 0.5f;
+            healthBarSprite.color = tempColor;
+
+            alphaIncreasing = true;
+        }
+        else if (battleManager.pulseCycleTimer >= battleManager.pulseCycleSpeed * 1 / 12 && battleManager.pulseCycleTimer < battleManager.pulseCycleSpeed * 2 / 12 && alphaIncreasing == true)
+        {
+            tempColor.a = 1f;
+            healthBarSprite.color = tempColor;
+
+            alphaIncreasing = false;
+        }
+        else if (battleManager.pulseCycleTimer >= battleManager.pulseCycleSpeed * 6 / 12 && battleManager.pulseCycleTimer < battleManager.pulseCycleSpeed * 7 / 12 && alphaIncreasing == false)
+        {
+            tempColor.a = 0.5f;
+            healthBarSprite.color = tempColor;
+
+            alphaIncreasing = true;
+        }
+        else if (battleManager.pulseCycleTimer >= battleManager.pulseCycleSpeed * 7 / 12 && battleManager.pulseCycleTimer < battleManager.pulseCycleSpeed * 8 / 12 && alphaIncreasing == true)
+        {
+            tempColor.a = 1f;
+            healthBarSprite.color = tempColor;
+
+            alphaIncreasing = false;
         }
     }
 }

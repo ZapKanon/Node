@@ -443,7 +443,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: 28833c0e3fcefac45a27aa3e97c4527d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3454,6 +3454,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3540,6 +3541,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1ab518e0a1a934290d373813d1c89d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &520861681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11007,16 +11020,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
+  m_DynamicPixelsPerUnit: 100
   m_PresetInfoIsWorld: 0
 --- !u!223 &1715736729
 Canvas:
@@ -14003,12 +14016,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2989805613062233531, guid: e76928a6cfae4dd4bbefc9054bf2d615, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ac205169765c8fc459e608b8d216fe33, type: 3}
+    - target: {fileID: 2989805613062233533, guid: e76928a6cfae4dd4bbefc9054bf2d615, type: 3}
+      propertyPath: activeSprite
+      value: 
+      objectReference: {fileID: 2989805611957428187}
     - target: {fileID: 2989805613062233533, guid: e76928a6cfae4dd4bbefc9054bf2d615, type: 3}
       propertyPath: battleManager
       value: 
       objectReference: {fileID: 499071017}
+    - target: {fileID: 2989805613062233533, guid: e76928a6cfae4dd4bbefc9054bf2d615, type: 3}
+      propertyPath: inactiveSprite
+      value: 
+      objectReference: {fileID: 2989805611957428186}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e76928a6cfae4dd4bbefc9054bf2d615, type: 3}
+--- !u!212 &2989805611957428186 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 145647814835082553, guid: e76928a6cfae4dd4bbefc9054bf2d615, type: 3}
+  m_PrefabInstance: {fileID: 2989805611957428185}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &2989805611957428187 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2488068168410210088, guid: e76928a6cfae4dd4bbefc9054bf2d615, type: 3}
+  m_PrefabInstance: {fileID: 2989805611957428185}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4113961970929977248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14094,6 +14129,10 @@ PrefabInstance:
       value: SAMPLE DESCRIPTION
       objectReference: {fileID: 0}
     - target: {fileID: 4581200625548713394, guid: 796340541292c4a41a10c53e9fd8ecdf, type: 3}
+      propertyPath: m_fontSize
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4581200625548713394, guid: 796340541292c4a41a10c53e9fd8ecdf, type: 3}
       propertyPath: m_margin.w
       value: -143.70041
       objectReference: {fileID: 0}
@@ -14108,6 +14147,10 @@ PrefabInstance:
     - target: {fileID: 4581200625548713394, guid: 796340541292c4a41a10c53e9fd8ecdf, type: 3}
       propertyPath: m_margin.z
       value: -2.8520257
+      objectReference: {fileID: 0}
+    - target: {fileID: 4581200625548713394, guid: 796340541292c4a41a10c53e9fd8ecdf, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4581200625548713394, guid: 796340541292c4a41a10c53e9fd8ecdf, type: 3}
       propertyPath: m_isRightToLeft
