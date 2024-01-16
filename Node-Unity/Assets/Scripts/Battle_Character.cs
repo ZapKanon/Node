@@ -10,6 +10,8 @@ public abstract class Battle_Character : MonoBehaviour
     public float currentHealth;
     public float previousHealth;
 
+    protected float startHealthBarLengthScale;
+
     //Elemental weaknesses / resistances
     //Order matches Energy.Element enum (Normal, Fire, Ice, Electric)
     public float[] elementalWeaknesses;
@@ -40,6 +42,8 @@ public abstract class Battle_Character : MonoBehaviour
     //Ex: Taking damage, incurring a status effect, etc.
     public virtual void ReceiveEnergy(Energy receivedEnergy)
     {
+        Debug.Log("Conductor: " + receivedEnergy.Conductor);
+        Debug.Log("Booster: " + receivedEnergy.Booster);
         //Booster behavior
         if (receivedEnergy.Booster == Energy.Boosters.Distance)
         {
@@ -49,8 +53,7 @@ public abstract class Battle_Character : MonoBehaviour
         //If the action is an attack:
         if (receivedEnergy.Conductor == Energy.Conductors.Attack)
         {
-            TakeDamage(receivedEnergy.Strength, receivedEnergy.Element);    
-            
+            TakeDamage(receivedEnergy.Strength, receivedEnergy.Element);
         }
 
         //If the action is a shield:
@@ -70,6 +73,8 @@ public abstract class Battle_Character : MonoBehaviour
         {
 
             //TODO: Change this to use a Heal method
+            Debug.Log("Current HP: " + currentHealth);
+            Debug.Log("Gaining: " + receivedEnergy.Strength * healAffinity);
 
             if (currentHealth + receivedEnergy.Strength * healAffinity <= maxHealth)
             {
@@ -79,6 +84,7 @@ public abstract class Battle_Character : MonoBehaviour
             {
                 currentHealth = maxHealth;
             }
+            Debug.Log("New HP: " + currentHealth);
 
         }
     }

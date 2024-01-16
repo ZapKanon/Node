@@ -7,13 +7,15 @@ public class Grid : MonoBehaviour, ISaveable
     [SerializeField] private GameObject[] squares; 
     private GameObject[,] squareGrid;
     public static GameObject[,] nodeGrid;
+    int gridWidth = 8;
+    int gridHeight = 4;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        squareGrid = new GameObject[20, 5];
-        nodeGrid = new GameObject[20, 5];
+        squareGrid = new GameObject[gridWidth, gridHeight];
+        nodeGrid = new GameObject[gridWidth, gridHeight];
 
         PopulateSquareGrid();
         PopulateNodeGrid();
@@ -28,11 +30,11 @@ public class Grid : MonoBehaviour, ISaveable
     //Unity can't serialize 2D arrays and I don't feel like setting up custom UI to show one in the inspector so I'm converting from 1D to 2D array here.
     public void PopulateSquareGrid()
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < gridWidth; i++)
         {
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < gridHeight; j++)
             {
-                squareGrid[i, j] = squares[(j * 20) + i];
+                squareGrid[i, j] = squares[(j * gridWidth) + i];
 
                 //Let the square know its position in the grid
                 squareGrid[i, j].GetComponent<Grid_Square>().GridPosition = new Vector2(i, j);
@@ -42,9 +44,9 @@ public class Grid : MonoBehaviour, ISaveable
 
     public void PopulateNodeGrid()
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < gridWidth; i++)
         {
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < gridHeight; j++)
             {
                 if (squareGrid[i, j].GetComponent<Grid_Square>().NodeBlock != null)
                 {
@@ -214,9 +216,9 @@ public class Grid : MonoBehaviour, ISaveable
     //Remove blocks from all squares and delete those blocks.
     public void ClearAllBlocks()
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < gridWidth; i++)
         {
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < gridHeight; j++)
             {
                 //Remove reference to the block in the corresponding square and delete the block.
                 Node_Block clearingBlock = squareGrid[i, j].GetComponent<Grid_Square>().NodeBlock;
@@ -232,9 +234,9 @@ public class Grid : MonoBehaviour, ISaveable
     //Save data on each block in the grid.
     public void PopulateSaveData(Save_Data a_SaveData)
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < gridWidth; i++)
         {
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < gridHeight; j++)
             {
                 Debug.Log("Attempting block [" + i + ", " + j + "]");
                 Debug.Log(nodeGrid[i, j]);
@@ -270,7 +272,7 @@ public class Grid : MonoBehaviour, ISaveable
         ClearAllBlocks();
 
         Save_Data.BlockData[] savedGrid = a_SaveData.m_AllBlockData.m_BlockData;
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < (gridWidth * gridHeight); i++)
         {
             //Debug.Log(savedGrid[i].path);
             if (savedGrid[i].path != "")
@@ -279,16 +281,16 @@ public class Grid : MonoBehaviour, ISaveable
                 GameObject newBlock = Resources.Load<GameObject>(savedGrid[i].path);         
 
                 //Instantiate block at proper location.
-                newBlock = Instantiate(newBlock, squareGrid[(int)Mathf.Floor(i / 5), i % 5].transform.position, transform.rotation);
+                newBlock = Instantiate(newBlock, squareGrid[(int)Mathf.Floor(i / gridHeight), i % gridHeight].transform.position, transform.rotation);
 
                 //Add the block to the nodeGrid and the corresponding square.
-                nodeGrid[(int)Mathf.Floor(i / 5), i % 5] = newBlock;
-                squareGrid[(int)Mathf.Floor(i / 5), i % 5].GetComponent<Grid_Square>().NodeBlock = newBlock.GetComponent<Node_Block>();
+                nodeGrid[(int)Mathf.Floor(i / gridHeight), i % gridHeight] = newBlock;
+                squareGrid[(int)Mathf.Floor(i / gridHeight), i % gridHeight].GetComponent<Grid_Square>().NodeBlock = newBlock.GetComponent<Node_Block>();
 
                 //Set block properties.
                 //newBlock.GetComponent<Node_Block>().BlockRotation = savedGrid[i].rotation;
-                squareGrid[(int)Mathf.Floor(i / 5), i % 5].GetComponent<Grid_Square>().NodeBlock.BlockRotation = savedGrid[i].rotation;
-                squareGrid[(int)Mathf.Floor(i / 5), i % 5].GetComponent<Grid_Square>().NodeBlock.UpdateEnterDirections();
+                squareGrid[(int)Mathf.Floor(i / gridHeight), i % gridHeight].GetComponent<Grid_Square>().NodeBlock.BlockRotation = savedGrid[i].rotation;
+                squareGrid[(int)Mathf.Floor(i / gridHeight), i % gridHeight].GetComponent<Grid_Square>().NodeBlock.UpdateEnterDirections();
                 //newBlock.GetComponent<Node_Block>().UpdateEnterDirections();
                 //squareGrid[(int)Mathf.Floor(i / 5), i % 5].GetComponent<Grid_Square>().NodeBlock.GridPosition = savedGrid[i].gridPosition; (gridPosition isn't actually used from Save_Data for now, it's just for reference when editing the file itself)
                 newBlock.GetComponent<Node_Block>().GridPosition = savedGrid[i].gridPosition;

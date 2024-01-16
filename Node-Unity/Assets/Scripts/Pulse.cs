@@ -56,7 +56,7 @@ public class Pulse : MonoBehaviour
     //Trigger creation of energy if the block above this pulse is a source node
     public void CheckForSource()
     {
-        if (CurrentGridColumn >= 0 && CurrentGridColumn < 20)
+        if (CurrentGridColumn >= 0 && CurrentGridColumn < 8)
         {
             battle_manager.CreateEnergy(this);
         }

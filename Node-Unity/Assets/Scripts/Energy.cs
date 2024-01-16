@@ -94,12 +94,13 @@ public class Energy : MonoBehaviour
     }
 
     //Applies this energy's effects to a previously specified target if valid.
-    public void Execute()
+    public void Execute(Battle_Character target)
     {
-        if (CheckValidTarget())
+        Debug.Log("Executing...");
+        if (CheckValidTarget(target))
         {
+            Debug.Log("Valid!");
             currentTarget.ReceiveEnergy(this);
-            //Debug.Log("Actually sending energy to valid target.");
 
             if (Conductor == Energy.Conductors.Attack)
             {
@@ -126,11 +127,18 @@ public class Energy : MonoBehaviour
                 eventHeal.start();
             }
         }
+        //TODO: Make this less jank. Enemies currently have the energy script attached to them directly so destroying the energy gameObject would destroy the enemy entirely.
+        if (gameObject.TryGetComponent(out SpriteRenderer _))
+        {
+            Destroy(gameObject);
+            Debug.Log("Destroyed");
+        }
     }
 
     //Determine if current target exists and isn't dead.
-    public virtual bool CheckValidTarget()
+    public virtual bool CheckValidTarget(Battle_Character target)
     {
+        currentTarget = target;
         //Debug.Log("Is the target valid?");
         Debug.Log(currentTarget);
         if (currentTarget != null && currentTarget.currentHealth > 0)

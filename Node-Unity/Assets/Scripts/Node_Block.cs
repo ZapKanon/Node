@@ -220,7 +220,7 @@ public abstract class Node_Block : MonoBehaviour
     public virtual void UpdateEnterDirections()
     {
         //Default to EnterDirections of Up and Down (at Rotate0)
-        //Child clases with different layouts (corners etc.) will overwrite this.
+        //Child classes with different layouts (corners etc.) will overwrite this.
         EnterDirectionA = (Directions)BlockRotation;
 
         EnterDirectionB = (Directions)(((int)BlockRotation + 2) % 4);
@@ -280,7 +280,7 @@ public abstract class Node_Block : MonoBehaviour
         switch (ExitDirection)
         {
             case Directions.Up:
-                if (GridPosition.y - 1 >= 0)
+                if (GridPosition.y > 0)
                 {
                     if (Grid.nodeGrid[(int)GridPosition.x, (int)GridPosition.y - 1] != null)
                     {
@@ -294,10 +294,19 @@ public abstract class Node_Block : MonoBehaviour
                     }
                     
                 }
-                //If the target block would be off the top of the grid, send to an Action slot.
+                //Attack the enemy if the energy has reached the top of the grid.
                 else
                 {
-                    Action_Bar.actions[Mathf.FloorToInt(GridPosition.x / 2)].GetComponent<Action_Hub>().ReceiveEnergy(PossessedEnergy);
+                    Debug.Log(PossessedEnergy.Element);
+                    if (PossessedEnergy.Conductor == Energy.Conductors.Heal)
+                    {
+                        PossessedEnergy.Execute(Battle_Manager.player);
+                    }
+                    else
+                    {
+                        Debug.Log(Battle_Manager.selectedEnemy);
+                        PossessedEnergy.Execute(Battle_Manager.selectedEnemy);
+                    }
                     PossessedEnergy = null;
                     HasEnergy = false;
                 }
@@ -375,7 +384,6 @@ public abstract class Node_Block : MonoBehaviour
     //Transfer energy from this block to another that has been found and approved by AttemptSend
     public void AttemptSend(Node_Block targetBlock)
     {
-        //Debug.Log("Target block exists, really attempting send...");
         if (!targetBlock.HasEnergy)
         {
             if (targetBlock.EnterDirectionA == (Directions)(((int)ExitDirection + 2) % 4)) //Results in opposite direction from ExitDirection.

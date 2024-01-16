@@ -33,8 +33,8 @@ public class Grid_Square : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (NodeBlock != null)
-        Battle_Manager.tooltipManager.UpdateToolTip(NodeBlock.toolTip, NodeBlock);
+        //if (NodeBlock != null)
+        //Battle_Manager.tooltipManager.UpdateToolTip(NodeBlock.toolTip, NodeBlock);
     }
 
     private void OnMouseOver()
@@ -57,7 +57,7 @@ public class Grid_Square : MonoBehaviour
     private void OnMouseExit()
     {
         GetComponent<SpriteRenderer>().enabled = false;
-        Battle_Manager.tooltipManager.ClearToolTip();
+        //Battle_Manager.tooltipManager.ClearToolTip();
     }
 
     

@@ -148,7 +148,7 @@ public class Action_Hub : MonoBehaviour
     public void TargetEnemy(Battle_Enemy targetedEnemy)
     {
         PossessedEnergy.currentTarget = targetedEnemy;
-        PossessedEnergy.Execute();
+        PossessedEnergy.Execute(Battle_Manager.selectedEnemy);
 
         //Trigger a sound.
         eventActionWaiting.stop(STOP_MODE.IMMEDIATE);
@@ -196,7 +196,7 @@ public class Action_Hub : MonoBehaviour
         if (PossessedEnergy.Conductor == Energy.Conductors.Heal)
         {
             PossessedEnergy.currentTarget = Battle_Manager.player;
-            PossessedEnergy.Execute();
+            PossessedEnergy.Execute(PossessedEnergy.currentTarget);
 
             Battle_Manager.selectedAction = null;
             Deactivate();

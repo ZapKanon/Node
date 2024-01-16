@@ -54,6 +54,7 @@ public abstract class Battle_Enemy : Battle_Character
         neutral = transform.position.y;
         down = transform.position.y - 0.1f;
         activeSprite.color = new Color(1, 1, 1, 0);
+        startHealthBarLengthScale = healthBarObject.transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -61,6 +62,8 @@ public abstract class Battle_Enemy : Battle_Character
     {
         UpdateActionTimer();
         AnimateHealthBar();
+        //Since action hubs no longer exist, this enemy is always selected for attacks.
+        Select();
     }
 
     //Enemies perform actions at a consistent rate.
@@ -92,7 +95,7 @@ public abstract class Battle_Enemy : Battle_Character
             if (actionSoundTriggered == false)
             {
                 //Trigger a sound.
-                eventEnemyAttack.start();
+                //eventEnemyAttack.start();
                 actionSoundTriggered = true;
             }
 
@@ -117,7 +120,7 @@ public abstract class Battle_Enemy : Battle_Character
             {
                 if (transform.position.y > down)
                 {
-                    transform.position += new Vector3(0, -0.5f * Time.deltaTime, 0);
+                    transform.position += new Vector3(0, -2.0f * Time.deltaTime, 0);
                 }
                 else
                 {
@@ -150,7 +153,7 @@ public abstract class Battle_Enemy : Battle_Character
     public void ExecuteAction()
     {
         Energy currentAction = ChooseAction();
-        currentAction.Execute();
+        currentAction.Execute(Battle_Manager.player);
     }
 
     //Select this enemy when clicked if active.
@@ -162,7 +165,6 @@ public abstract class Battle_Enemy : Battle_Character
     //Enemy selection only matters when targeting an enemy after selecting a player action.
     public void Select()
     {
-        Debug.Log("Enemy selected!");
         //Set this enemy as selected.
         Battle_Manager.selectedEnemy = this;
         //spriteRenderer.sprite = selectedSprite;
@@ -197,11 +199,11 @@ public abstract class Battle_Enemy : Battle_Character
             //eventEnemyTakeDamage.start();
         }
 
-        healthBarObject.transform.localScale = new Vector3(currentHealth * (1.0f / maxHealth) * 0.6f, healthBarObject.transform.localScale.y, healthBarObject.transform.localScale.z);
+        healthBarObject.transform.localScale = new Vector3(currentHealth * (1.0f / maxHealth) * startHealthBarLengthScale, healthBarObject.transform.localScale.y, healthBarObject.transform.localScale.z);
 
         //Reset time passed and position for animating yellow bar to interrupt any previous animation
         currentAnimatedHealth = previousHealth;
-        damageTakenObject.transform.localScale = new Vector3(previousHealth * (1.0f / maxHealth) * 0.6f, damageTakenObject.transform.localScale.y, damageTakenObject.transform.localScale.z);
+        damageTakenObject.transform.localScale = new Vector3(previousHealth * (1.0f / maxHealth) * startHealthBarLengthScale, damageTakenObject.transform.localScale.y, damageTakenObject.transform.localScale.z);
         healthDrainAnimationTimePassed = 0;
     }
 
@@ -219,7 +221,7 @@ public abstract class Battle_Enemy : Battle_Character
             else
             {
                 currentAnimatedHealth -= healthDrainAnimationSpeed * Time.deltaTime;
-                damageTakenObject.transform.localScale = new Vector3((currentAnimatedHealth) * (1.0f / maxHealth) * 0.6f, damageTakenObject.transform.localScale.y, damageTakenObject.transform.localScale.z);
+                damageTakenObject.transform.localScale = new Vector3((currentAnimatedHealth) * (1.0f / maxHealth) * startHealthBarLengthScale, damageTakenObject.transform.localScale.y, damageTakenObject.transform.localScale.z);
             }
         }
         //Reset healthDrainAnimationTimePassed once animation is complete

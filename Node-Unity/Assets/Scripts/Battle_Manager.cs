@@ -67,7 +67,7 @@ public class Battle_Manager : MonoBehaviour, ISaveable
     void Awake()
     {
         player = GetComponent<Battle_Player>();
-        tooltipManager = GameObject.Find("Tooltip Manager").GetComponent<Tooltip_Manager>();
+        //tooltipManager = GameObject.Find("Tooltip Manager").GetComponent<Tooltip_Manager>();
     }
 
     // Start is called before the first frame update
@@ -83,7 +83,7 @@ public class Battle_Manager : MonoBehaviour, ISaveable
         pulseCycleTimer = 0f;
         energyTravelSpeed = 1f;
         pulseStartPos = new Vector3(-3.35f, -1.735f, 0);
-        pulseEndPos = new Vector3(1.765f, -1.735f, 0);
+        pulseEndPos = new Vector3(-1.1f, -1.735f, 0);
 
         gridSaveData = new Save_Data();
 
@@ -146,7 +146,7 @@ public class Battle_Manager : MonoBehaviour, ISaveable
             }
             else
             {
-                selectedEnemy = null;
+               // selectedEnemy = null;
             }
         }
 
@@ -180,11 +180,11 @@ public class Battle_Manager : MonoBehaviour, ISaveable
         //Show the tooltip for any lifted block at all times.
         if (liftedBlock != null)
         {
-            tooltipManager.UpdateToolTip(liftedBlock.toolTip, liftedBlock);
+            //tooltipManager.UpdateToolTip(liftedBlock.toolTip, liftedBlock);
         }
         else if (selectedAction != null)
         {
-            tooltipManager.UpdateToolTip(Tooltip_Manager.ToolTips.Action, null, selectedAction);
+            //tooltipManager.UpdateToolTip(Tooltip_Manager.ToolTips.Action, null, selectedAction);
         }
 
         //Update the node grid whenever a block is placed or removed.
@@ -261,23 +261,29 @@ public class Battle_Manager : MonoBehaviour, ISaveable
 
         int pulseColumn = pulse.CurrentGridColumn;
 
-        if (currentNodeGrid[pulseColumn, 4] != null)
+        if (currentNodeGrid[pulseColumn, 3] != null)
         {
-            Node_Block currentBlock = currentNodeGrid[pulseColumn, 4].GetComponent<Node_Block>();
+            Node_Block currentBlock = currentNodeGrid[pulseColumn, 3].GetComponent<Node_Block>();
             //Proceed if the block is a source node and doesn't already contain energy
-            if (currentBlock.IsSource && currentBlock.HasEnergy == false)
+            if (currentBlock.HasEnergy == false && (currentBlock.EnterDirectionA == Node_Block.Directions.Down || currentBlock.EnterDirectionB == Node_Block.Directions.Down))
             {
-                //TODO: Instantiate energy prefab, set position to correct block and set that block's hasEnergy and possessedEnergy
                 GameObject newEnergyObject = Instantiate(energyObject, currentBlock.transform.position, Quaternion.identity);
                 newEnergyObject.transform.position += new Vector3(0, -0.09f, 0);
 
+                if (currentBlock.EnterDirectionA == Node_Block.Directions.Down)
+                {
+                    currentBlock.ExitDirection = currentBlock.EnterDirectionB;
+                }
+                else if (currentBlock.EnterDirectionB == Node_Block.Directions.Down)
+                {
+                    currentBlock.ExitDirection = currentBlock.EnterDirectionA;
+                }
+               
                 Energy newEnergy = newEnergyObject.GetComponent<Energy>();
-                newEnergy.GridPosition = new Vector2(pulseColumn, 4);
+                newEnergy.GridPosition = new Vector2(pulseColumn, 3);
                 currentBlock.PossessedEnergy = newEnergy;
                 currentBlock.HasEnergy = true;
                 newEnergy.EnteredNewBlock();
-
-                //Debug.Log("Creating energy in column " + pulseColumn);
             }
         }           
         
@@ -297,7 +303,7 @@ public class Battle_Manager : MonoBehaviour, ISaveable
         eventBattleMusic.stop(STOP_MODE.ALLOWFADEOUT);
 
         //Trigger a sound.
-        eventPlayerDefeat.start();
+        //eventPlayerDefeat.start();
     }
 
     //Remove a dead enemy from the enemies list

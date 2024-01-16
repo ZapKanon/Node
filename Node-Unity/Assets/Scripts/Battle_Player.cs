@@ -35,6 +35,7 @@ public class Battle_Player : Battle_Character
         testDamage = false;
 
         healthBarSprite = healthBarObject.GetComponent<SpriteRenderer>();
+        startHealthBarLengthScale = healthBarObject.transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -76,11 +77,11 @@ public class Battle_Player : Battle_Character
             battleManager.DeadPlayer();
         }
 
-        healthBarObject.transform.localScale = new Vector3(currentHealth * (1.0f / maxHealth), healthBarObject.transform.localScale.y, healthBarObject.transform.localScale.z);
+        healthBarObject.transform.localScale = new Vector3(currentHealth * (1.0f / maxHealth) * startHealthBarLengthScale, healthBarObject.transform.localScale.y, healthBarObject.transform.localScale.z);
 
         //Reset time passed and position for animating yellow bar to interrupt any previous animation
         currentAnimatedHealth = previousHealth;
-        damageTakenObject.transform.localScale = new Vector3(previousHealth * (1.0f / maxHealth), damageTakenObject.transform.localScale.y, damageTakenObject.transform.localScale.z);
+        damageTakenObject.transform.localScale = new Vector3(previousHealth * (1.0f / maxHealth) * startHealthBarLengthScale, damageTakenObject.transform.localScale.y, damageTakenObject.transform.localScale.z);
         healthDrainAnimationTimePassed = 0;
     }
 
@@ -90,10 +91,10 @@ public class Battle_Player : Battle_Character
         //If health is greater than expected (the player has been healed, for example), immediately update both health bars.
         if (previousHealth < currentHealth)
         {
-            healthBarObject.transform.localScale = new Vector3(currentHealth * (1.0f / maxHealth), healthBarObject.transform.localScale.y, healthBarObject.transform.localScale.z);
+            healthBarObject.transform.localScale = new Vector3(currentHealth * (1.0f / maxHealth) * startHealthBarLengthScale, healthBarObject.transform.localScale.y, healthBarObject.transform.localScale.z);
 
             currentAnimatedHealth = currentHealth;
-            damageTakenObject.transform.localScale = new Vector3(currentHealth * (1.0f / maxHealth), damageTakenObject.transform.localScale.y, damageTakenObject.transform.localScale.z);
+            damageTakenObject.transform.localScale = new Vector3(currentHealth * (1.0f / maxHealth) * startHealthBarLengthScale, damageTakenObject.transform.localScale.y, damageTakenObject.transform.localScale.z);
             healthDrainAnimationTimePassed = 0;
         }
 
@@ -108,7 +109,7 @@ public class Battle_Player : Battle_Character
             else
             {
                 currentAnimatedHealth -= healthDrainAnimationSpeed * Time.deltaTime;
-                damageTakenObject.transform.localScale = new Vector3 ((currentAnimatedHealth) * (1.0f / maxHealth), damageTakenObject.transform.localScale.y, damageTakenObject.transform.localScale.z);
+                damageTakenObject.transform.localScale = new Vector3 ((currentAnimatedHealth) * (1.0f / maxHealth) * startHealthBarLengthScale, damageTakenObject.transform.localScale.y, damageTakenObject.transform.localScale.z);
             }
         }
         //Reset healthDrainAnimationTimePassed once animation is complete
