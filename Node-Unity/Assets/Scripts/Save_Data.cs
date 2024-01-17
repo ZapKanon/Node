@@ -9,14 +9,14 @@ public class Save_Data
     public struct BlockData
     {
         public string path;
-        public Vector2 gridPosition;
+        public Vector2Int gridPosition;
         public Node_Block.Rotations rotation;
     }
 
     [System.Serializable]
     public class AllBlockData
     {
-        public BlockData[] m_BlockData = new BlockData[100];
+        public BlockData[] m_BlockData = new BlockData[32];
     }
 
     public int m_Score;

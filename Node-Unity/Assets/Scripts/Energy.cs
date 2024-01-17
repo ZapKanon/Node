@@ -96,10 +96,8 @@ public class Energy : MonoBehaviour
     //Applies this energy's effects to a previously specified target if valid.
     public void Execute(Battle_Character target)
     {
-        Debug.Log("Executing...");
         if (CheckValidTarget(target))
         {
-            Debug.Log("Valid!");
             currentTarget.ReceiveEnergy(this);
 
             if (Conductor == Energy.Conductors.Attack)
@@ -131,7 +129,6 @@ public class Energy : MonoBehaviour
         if (gameObject.TryGetComponent(out SpriteRenderer _))
         {
             Destroy(gameObject);
-            Debug.Log("Destroyed");
         }
     }
 
@@ -139,14 +136,11 @@ public class Energy : MonoBehaviour
     public virtual bool CheckValidTarget(Battle_Character target)
     {
         currentTarget = target;
-        //Debug.Log("Is the target valid?");
-        Debug.Log(currentTarget);
         if (currentTarget != null && currentTarget.currentHealth > 0)
         {
             return true;
         }
 
-        //Debug.Log("No!");
         return false;
     }
 }

@@ -42,8 +42,6 @@ public abstract class Battle_Character : MonoBehaviour
     //Ex: Taking damage, incurring a status effect, etc.
     public virtual void ReceiveEnergy(Energy receivedEnergy)
     {
-        Debug.Log("Conductor: " + receivedEnergy.Conductor);
-        Debug.Log("Booster: " + receivedEnergy.Booster);
         //Booster behavior
         if (receivedEnergy.Booster == Energy.Boosters.Distance)
         {

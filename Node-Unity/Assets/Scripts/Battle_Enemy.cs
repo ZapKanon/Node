@@ -132,7 +132,6 @@ public abstract class Battle_Enemy : Battle_Character
 
         if (completedAction == true)
         {
-            Debug.Log("Executing enemy action.");
             ExecuteAction();
             actionTimer -= actionSpeed;
             woundUp = false;

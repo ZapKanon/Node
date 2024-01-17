@@ -13,7 +13,7 @@ public class Grid_Square : MonoBehaviour
     private EventInstance eventRemove;
     private EventInstance eventRotate;
 
-    public Vector2 GridPosition { get; set; }
+    public Vector2Int GridPosition { get; set; }
 
     [field:SerializeField] public Node_Block NodeBlock { get; set; }
 

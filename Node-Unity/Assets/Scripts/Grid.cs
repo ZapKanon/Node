@@ -37,7 +37,7 @@ public class Grid : MonoBehaviour, ISaveable
                 squareGrid[i, j] = squares[(j * gridWidth) + i];
 
                 //Let the square know its position in the grid
-                squareGrid[i, j].GetComponent<Grid_Square>().GridPosition = new Vector2(i, j);
+                squareGrid[i, j].GetComponent<Grid_Square>().GridPosition = new Vector2Int(i, j);
             }
         }
     }
@@ -248,7 +248,7 @@ public class Grid : MonoBehaviour, ISaveable
                     blockData.path = blockScript.BlockPath;
                     blockData.gridPosition = blockScript.GridPosition;
                     blockData.rotation = blockScript.BlockRotation;
-                    a_SaveData.m_AllBlockData.m_BlockData[5 * i + j] = blockData;
+                    a_SaveData.m_AllBlockData.m_BlockData[gridHeight * i + j] = blockData;
                     Debug.Log("[" + i + ", " + j + "] Saved block to data!");
                     a_SaveData.m_Score = 4;
                     
@@ -258,9 +258,9 @@ public class Grid : MonoBehaviour, ISaveable
                 {
                     Save_Data.BlockData blockData = new Save_Data.BlockData();
                     blockData.path = "";
-                    blockData.gridPosition = new Vector2(i, j);
+                    blockData.gridPosition = new Vector2Int(i, j);
                     blockData.rotation = 0;
-                    a_SaveData.m_AllBlockData.m_BlockData[5 * i + j] = blockData;
+                    a_SaveData.m_AllBlockData.m_BlockData[gridHeight * i + j] = blockData;
                 }
             }
         }      

@@ -51,7 +51,7 @@ public abstract class Node_Block : MonoBehaviour
     [field: SerializeField] public Rotations BlockRotation { get; set; }
     [field: SerializeField] public bool HasEnergy { get; set; }
     protected bool HadEnergy { get; set; }
-    [field: SerializeField] public Vector2 GridPosition { get; set; }
+    [field: SerializeField] public Vector2Int GridPosition { get; set; }
     public Energy PossessedEnergy { get; set; }
 
     public bool Placed { get; set; }
